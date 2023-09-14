@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="caykimnhoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User" Type="int" />
+          <Property Name="Total_Product" Type="int" />
+          <Property Name="Total_Price" Type="money" />
+        </EntityType>
+        <EntityType Name="Cart_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cart" Type="int" Nullable="false" />
+          <Property Name="ID_Products" Type="int" Nullable="false" />
+          <Property Name="Product_Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Product_Color" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Product_Size" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Product_Quantity" Type="int" Nullable="false" />
+          <Property Name="Product_Price" Type="money" Nullable="false" />
+          <Property Name="Product_Import_Price" Type="money" Nullable="false" />
+          <Property Name="Product_Sale" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Add_Date" Type="datetime" Nullable="false" />
+          <Property Name="ID_Color" Type="int" Nullable="false" />
+          <Property Name="ID_Size" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetailProducts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Products" Type="int" Nullable="false" />
+          <Property Name="ID_Colors" Type="int" Nullable="false" />
+          <Property Name="ID_Size" Type="int" Nullable="false" />
+          <Property Name="Import_Price" Type="money" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Images" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sale" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ID_Category" Type="int" />
+          <Property Name="Create_Date" Type="datetime" Nullable="false" />
+          <Property Name="Videos" Type="nvarchar(max)" />
+          <Property Name="Images" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToTalViews" Type="int" Nullable="false" />
+          <Property Name="TotalOrders" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cart_Detail_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="Cart_Detail" Type="Self.Cart_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart_Detail">
+              <PropertyRef Name="ID_Cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Detail_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="Cart_Detail" Type="Self.Cart_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart_Detail">
+              <PropertyRef Name="ID_Color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Detail_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Cart_Detail" Type="Self.Cart_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart_Detail">
+              <PropertyRef Name="ID_Products" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Detail_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="1" />
+          <End Role="Cart_Detail" Type="Self.Cart_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart_Detail">
+              <PropertyRef Name="ID_Size" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Colors_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="Colors1" Type="Self.Colors" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Colors1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailProducts_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="DetailProducts" Type="Self.DetailProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailProducts">
+              <PropertyRef Name="ID_Colors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailProducts_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="DetailProducts" Type="Self.DetailProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailProducts">
+              <PropertyRef Name="ID_Products" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailProducts_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="1" />
+          <End Role="DetailProducts" Type="Self.DetailProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailProducts">
+              <PropertyRef Name="ID_Size" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="caykimnhoModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart_Detail" EntityType="Self.Cart_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailProducts" EntityType="Self.DetailProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cart_Detail_Cart" Association="Self.FK_Cart_Detail_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Detail_Colors" Association="Self.FK_Cart_Detail_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Detail_Products" Association="Self.FK_Cart_Detail_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Detail_Size" Association="Self.FK_Cart_Detail_Size">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Colors_Colors" Association="Self.FK_Colors_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Colors1" EntitySet="Colors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailProducts_Colors" Association="Self.FK_DetailProducts_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="DetailProducts" EntitySet="DetailProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailProducts_Products" Association="Self.FK_DetailProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DetailProducts" EntitySet="DetailProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailProducts_Size" Association="Self.FK_DetailProducts_Size">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="DetailProducts" EntitySet="DetailProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="caykimnhoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User" Type="Int32" />
+          <Property Name="Total_Product" Type="Int32" />
+          <Property Name="Total_Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Cart" FromRole="Cart" ToRole="Cart_Detail" />
+        </EntityType>
+        <EntityType Name="Cart_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cart" Type="Int32" Nullable="false" />
+          <Property Name="ID_Products" Type="Int32" Nullable="false" />
+          <Property Name="Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product_Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product_Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Product_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Product_Import_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Product_Sale" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Add_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ID_Color" Type="Int32" Nullable="false" />
+          <Property Name="ID_Size" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Detail_Cart" FromRole="Cart_Detail" ToRole="Cart" />
+          <NavigationProperty Name="Colors" Relationship="Self.FK_Cart_Detail_Colors" FromRole="Cart_Detail" ToRole="Colors" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Cart_Detail_Products" FromRole="Cart_Detail" ToRole="Products" />
+          <NavigationProperty Name="Size" Relationship="Self.FK_Cart_Detail_Size" FromRole="Cart_Detail" ToRole="Size" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Colors" FromRole="Colors" ToRole="Cart_Detail" />
+          <NavigationProperty Name="Colors1" Relationship="Self.FK_Colors_Colors" FromRole="Colors" ToRole="Colors1" />
+          <NavigationProperty Name="Colors2" Relationship="Self.FK_Colors_Colors" FromRole="Colors1" ToRole="Colors" />
+          <NavigationProperty Name="DetailProducts" Relationship="Self.FK_DetailProducts_Colors" FromRole="Colors" ToRole="DetailProducts" />
+        </EntityType>
+        <EntityType Name="DetailProducts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Products" Type="Int32" Nullable="false" />
+          <Property Name="ID_Colors" Type="Int32" Nullable="false" />
+          <Property Name="ID_Size" Type="Int32" Nullable="false" />
+          <Property Name="Import_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sale" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Colors" Relationship="Self.FK_DetailProducts_Colors" FromRole="DetailProducts" ToRole="Colors" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_DetailProducts_Products" FromRole="DetailProducts" ToRole="Products" />
+          <NavigationProperty Name="Size" Relationship="Self.FK_DetailProducts_Size" FromRole="DetailProducts" ToRole="Size" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Category" Type="Int32" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Videos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ToTalViews" Type="Int32" Nullable="false" />
+          <Property Name="TotalOrders" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Products" FromRole="Products" ToRole="Cart_Detail" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="DetailProducts" Relationship="Self.FK_DetailProducts_Products" FromRole="Products" ToRole="DetailProducts" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Size" FromRole="Size" ToRole="Cart_Detail" />
+          <NavigationProperty Name="DetailProducts" Relationship="Self.FK_DetailProducts_Size" FromRole="Size" ToRole="DetailProducts" />
+        </EntityType>
+        <Association Name="FK_Cart_Detail_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="Cart_Detail" Type="Self.Cart_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart_Detail">
+              <PropertyRef Name="ID_Cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Detail_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="Cart_Detail" Type="Self.Cart_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart_Detail">
+              <PropertyRef Name="ID_Color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Detail_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Cart_Detail" Type="Self.Cart_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart_Detail">
+              <PropertyRef Name="ID_Products" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Detail_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="1" />
+          <End Role="Cart_Detail" Type="Self.Cart_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart_Detail">
+              <PropertyRef Name="ID_Size" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Colors_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="Colors1" Type="Self.Colors" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Colors1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailProducts_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="DetailProducts" Type="Self.DetailProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailProducts">
+              <PropertyRef Name="ID_Colors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailProducts_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="DetailProducts" Type="Self.DetailProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailProducts">
+              <PropertyRef Name="ID_Products" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailProducts_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="1" />
+          <End Role="DetailProducts" Type="Self.DetailProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailProducts">
+              <PropertyRef Name="ID_Size" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="caykimnhoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cart" EntityType="Self.Cart" />
+          <EntitySet Name="Cart_Detail" EntityType="Self.Cart_Detail" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Colors" EntityType="Self.Colors" />
+          <EntitySet Name="DetailProducts" EntityType="Self.DetailProducts" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Size" EntityType="Self.Size" />
+          <AssociationSet Name="FK_Cart_Detail_Cart" Association="Self.FK_Cart_Detail_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Detail_Colors" Association="Self.FK_Cart_Detail_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Detail_Products" Association="Self.FK_Cart_Detail_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Detail_Size" Association="Self.FK_Cart_Detail_Size">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Colors_Colors" Association="Self.FK_Colors_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Colors1" EntitySet="Colors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailProducts_Colors" Association="Self.FK_DetailProducts_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="DetailProducts" EntitySet="DetailProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailProducts_Products" Association="Self.FK_DetailProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DetailProducts" EntitySet="DetailProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailProducts_Size" Association="Self.FK_DetailProducts_Size">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="DetailProducts" EntitySet="DetailProducts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="caykimnhoModelStoreContainer" CdmEntityContainer="caykimnhoEntities">
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="caykimnhoModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Total_Product" ColumnName="Total_Product" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart_Detail">
+            <EntityTypeMapping TypeName="caykimnhoModel.Cart_Detail">
+              <MappingFragment StoreEntitySet="Cart_Detail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Cart" ColumnName="ID_Cart" />
+                <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Product_Color" ColumnName="Product_Color" />
+                <ScalarProperty Name="Product_Size" ColumnName="Product_Size" />
+                <ScalarProperty Name="Product_Quantity" ColumnName="Product_Quantity" />
+                <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+                <ScalarProperty Name="Product_Import_Price" ColumnName="Product_Import_Price" />
+                <ScalarProperty Name="Product_Sale" ColumnName="Product_Sale" />
+                <ScalarProperty Name="Add_Date" ColumnName="Add_Date" />
+                <ScalarProperty Name="ID_Color" ColumnName="ID_Color" />
+                <ScalarProperty Name="ID_Size" ColumnName="ID_Size" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="caykimnhoModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="caykimnhoModel.Colors">
+              <MappingFragment StoreEntitySet="Colors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailProducts">
+            <EntityTypeMapping TypeName="caykimnhoModel.DetailProducts">
+              <MappingFragment StoreEntitySet="DetailProducts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
+                <ScalarProperty Name="ID_Colors" ColumnName="ID_Colors" />
+                <ScalarProperty Name="ID_Size" ColumnName="ID_Size" />
+                <ScalarProperty Name="Import_Price" ColumnName="Import_Price" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="caykimnhoModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Videos" ColumnName="Videos" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="ToTalViews" ColumnName="ToTalViews" />
+                <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Size">
+            <EntityTypeMapping TypeName="caykimnhoModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
