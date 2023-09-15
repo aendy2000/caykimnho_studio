@@ -1,0 +1,129 @@
+﻿@model caykimnho_studio.Models.Products
+@{
+    var images = Model.Images.Split('#').ToList();
+}
+
+<div id="product-body" class="modal_body">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product_zoom_gallery">
+                    <div class="zoom_gallery_inner d-flex">
+                        <div class="zoom_tab_img">
+                            @foreach (var image in images)
+                            {
+                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="@image" alt="tab-thumb"></a>
+                            }
+                        </div>
+                        <div class="product_zoom_main_img">
+                            @foreach (var image in images)
+                            {
+                                <div class="product_zoom_thumb">
+                                    <img data-image="image" src="@image" alt="">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product_d_right">
+                    <form action="#">
+                        <h1>@Model.Name</h1>
+                        <div class="product_ratting_review d-flex align-items-center">
+                            <div class=" product_ratting">
+                                <ul class="d-flex">
+                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="product_review">
+                                <ul class="d-flex">
+                                    <li>4 đánh giá</li>
+                                    <li>Viết đánh giá của bạn</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="price_box">
+                            @{
+                                var sale = Model.DetailProducts.OrderByDescending(o => o.Sale).First().Sale;
+                                var prices = Model.DetailProducts.First().Price;
+                                if (sale != 0)
+                                {
+                                    <span class="current_price">@((prices - (prices * sale)).ToString("0,0"))đ </span>
+                                    <span class="old_price"> @prices.ToString("0,0")đ</span>
+                                }
+                                else
+                                {
+                                    <span class="current_price">@prices.ToString("0,0")đ</span>
+                                }
+                            }
+
+                        </div>
+                        <div class="product_availalbe">
+                            <ul class="d-flex">
+                                <li><i class="icon-layers icons"></i> Kho: <span>@Model.DetailProducts.Sum(s => s.Quantity)</span></li>
+                                <li>Hàng: <span class="stock">May 2 - 15 ngày</span></li>
+                            </ul>
+                        </div>
+                        <div class="product_variant">
+                            <div class="filter__list widget_color d-flex align-items-center">
+                                <h3>Màu sắc</h3>
+                                <ul>
+                                    @foreach (var items in Model.DetailProducts.ToList())
+                                    {
+                                        <li>
+                                            <label class="checkmark color3" for="checkmau-@items.Colors.ID">@items.Colors.Name</label>
+                                            <input name="checkmau-@items.Colors.ID" id="checkmau-@items.Colors.ID" type="checkbox">
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="filter__list widget_size d-flex align-items-center">
+                                <h3>Kích cỡ</h3>
+                                <ul>
+                                    @foreach (var items in Model.DetailProducts.ToList())
+                                    {
+                                        <li>
+                                            <a href="javascript:void(0)">@items.Size.Name</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+
+                            <div class="variant_quantity_btn d-flex">
+                                <div class="pro-qty border">
+                                    <input min="1" max="100" type="tex" value="1">
+                                </div>
+                                <button class="button btn btn-primary" type="submit"><i class="ion-android-add"></i> Thêm Vào Giỏ hàng</button>
+                                <a data-tippy="Thêm vào yêu thích" class="wishlist"><i class="ion-ios-heart"></i></a>
+                            </div>
+                        </div>
+                        <div class="product_sku">
+                            <p><span>SKU: </span> #PRODUCT@(Model.ID.ToString("D6"))</p>
+                        </div>
+                        <div class="product_tags d-flex">
+                            <span>tags: </span>
+                            <ul class="d-flex">
+                                <li><a href="#">@Model.Categories.Name</a></li>
+                            </ul>
+                        </div>
+                        <div class="priduct_social d-flex">
+                            <span>SHARE: </span>
+                            <ul>
+                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                <li><a href="#"><i class="ion-social-googleplus-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
+                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
