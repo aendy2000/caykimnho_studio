@@ -4709,44 +4709,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
         margin-bottom: 15px;
     }
 
-.widget_size ul li {
-    display: inline-block;
-    margin-right: 8px;
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .widget_size ul li {
-        margin-bottom: 5px;
-    }
-}
-
-.widget_size ul li:last-child {
-    margin-right: 0;
-}
-
-.widget_size ul li a {
-    width: 38px;
-    height: 38px;
-    line-height: 38px;
-    text-align: center;
-    font-size: 12px;
-    color: #999999;
-    display: inline-block;
-    border-radius: 50%;
-    background: #f1f1f1;
-    border: 1px solid transparent;
-}
-
-    .widget_size ul li a:hover {
-        border-color: #c8ab78;
-        color: #000000;
-    }
-
 .widget_color > ul > li {
     position: relative;
     display: inline-block;
-    padding-right: 36px;
-    padding-bottom: 30px;
+    padding-right: 5px;
+    margin-bottom: 5px;
 }
 
     .widget_color > ul > li input {
@@ -4755,75 +4722,61 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
         transform: translatey(-50%);
         opacity: 0;
         cursor: pointer;
-        z-index: 999;
+        z-index: -1;
         width: 100%;
         height: 30px;
     }
 
-        .widget_color > ul > li input:checked ~ .checkmark::before {
-            display: block;
+        .css-checked:checked + .checkmark {
+            background: #c8ab78;
+            color: white;
         }
 
-    .widget_color > ul > li span.color1 {
+    .widget_color > ul > li label.color1 {
         background: #ebcccc;
     }
 
-    .widget_color > ul > li span.color2 {
+    .widget_color > ul > li label.color2 {
         background: #cc6600;
     }
 
-    .widget_color > ul > li span.color3 {
+    .widget_color > ul > li label.color3 {
         background: #f5ebcc;
     }
 
-    .widget_color > ul > li span.color4 {
+    .widget_color > ul > li label.color4 {
         background: #f5f5cc;
     }
 
-    .widget_color > ul > li span.color5 {
+    .widget_color > ul > li label.color5 {
         background: #ebf5e0;
     }
 
-    .widget_color > ul > li span.color6 {
+    .widget_color > ul > li label.color6 {
         background: #d6e4ef;
     }
 
-    .widget_color > ul > li span.color7 {
+    .widget_color > ul > li label.color7 {
         background: #e5def2;
     }
 
-    .widget_color > ul > li span.color8 {
+    .widget_color > ul > li label.color8 {
         background: #f6e3f8;
     }
 
-    .widget_color > ul > li span.checkmark {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-        display: block;
-        position: absolute;
-        top: 50%;
-        transform: translatey(-50%);
+    .widget_color > ul > li label.checkmark {
+        height: auto;
+        width: auto;
+        border-radius: 15px;
+        display: flex;
+        padding: 5px 8px 5px 8px;
         transition: .3s;
     }
 
-        .widget_color > ul > li span.checkmark::before {
-            left: 44%;
-            top: 31%;
-            width: 6px;
-            height: 10px;
-            border: solid white;
-            border-top-width: medium;
-            border-right-width: medium;
-            border-bottom-width: medium;
-            border-left-width: medium;
-            border-width: 0 2px 2px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-            content: "";
-            position: absolute;
-            display: none;
+
+        .widget_color > ul > li label.checkmark:hover {
+            background: #c8ab78;
+            color: white;
         }
 
 .recent_thumb {
@@ -5808,64 +5761,15 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .product_variant .filter__list h3 {
-    margin-bottom: 0;
-    width: 140px;
+    margin-bottom: 7px;
+    margin-right: 15px;
+    white-space: nowrap;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .product_variant .filter__list h3 {
-        width: 126px;
-    }
-}
 
 @media only screen and (max-width: 767px) {
     .product_variant .filter__list h3 {
-        width: 115px;
         font-size: 13px;
-    }
-}
-
-.product_variant .filter__list.widget_size {
-    margin-bottom: 37px;
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .product_variant .filter__list.widget_size {
-        margin-bottom: 25px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .product_variant .filter__list.widget_size {
-        margin-bottom: 26px;
-    }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .product_variant .filter__list.widget_size ul li {
-        margin-right: 4px;
-    }
-}
-
-@media only screen and (max-width: 575px) {
-    .product_variant .filter__list.widget_size ul li {
-        margin-right: 1px;
-    }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .product_variant .filter__list.widget_size ul li a {
-        width: 36px;
-        height: 36px;
-        line-height: 36px;
-    }
-}
-
-@media only screen and (max-width: 575px) {
-    .product_variant .filter__list.widget_size ul li a {
-        width: 30px;
-        height: 32px;
-        line-height: 30px;
     }
 }
 

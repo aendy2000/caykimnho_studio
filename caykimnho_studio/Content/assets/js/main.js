@@ -319,6 +319,7 @@
 
     //Quick View Product
     $('[id^="quickViewProduct-"]').on('click', function () {
+        $('#Loaders').fadeIn('slow');
         var id = $(this).attr('name');
         var formData = new FormData();
         formData.append('id', id);
@@ -332,7 +333,6 @@
         }).done(function (result) {
             $('#product-body').replaceWith(result);
             $('#modal_product-detail').modal('toggle');
-
             setTimeout(function () {
                 $('.zoom_tab_img').slick({
                     centerMode: true,
@@ -364,7 +364,6 @@
                             }
                         },
                     ]
-
                 });
 
                 // Slick Slider Activation
@@ -384,6 +383,8 @@
                         },
                     ]
                 });
+                $('#Loaders').fadeOut('slow');
+
             }, 200);
         });
     });

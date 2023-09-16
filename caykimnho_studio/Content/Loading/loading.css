@@ -1,0 +1,44 @@
+﻿.loaders {
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: #FCFCFF;
+    background-image: url('loading.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    z-index: 99999;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+    .loaders {
+        background-size: 20%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .loaders {
+        background-size: 20%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .loaders {
+        background-size: 40%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .loaders {
+        background-size: 40%;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .loaders {
+        background-size: 80%;
+    }
+}

@@ -3,7 +3,7 @@
     var images = Model.Images.Split('#').ToList();
 }
 
-<div id="product-body" class="modal_body">
+<div id="product-body" class="modal_body ph-col-12">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
@@ -53,12 +53,12 @@
                                 var prices = Model.DetailProducts.First().Price;
                                 if (sale != 0)
                                 {
-                                    <span class="current_price">@((prices - (prices * sale)).ToString("0,0"))đ </span>
+                                    <span class="current_price text-danger">@((prices - (prices * sale)).ToString("0,0"))đ </span>
                                     <span class="old_price"> @prices.ToString("0,0")đ</span>
                                 }
                                 else
                                 {
-                                    <span class="current_price">@prices.ToString("0,0")đ</span>
+                                    <span class="current_price text-danger">@prices.ToString("0,0")đ</span>
                                 }
                             }
 
@@ -71,24 +71,25 @@
                         </div>
                         <div class="product_variant">
                             <div class="filter__list widget_color d-flex align-items-center">
-                                <h3>Màu sắc</h3>
+                                <h3>Màu :</h3>
                                 <ul>
                                     @foreach (var items in Model.DetailProducts.ToList())
                                     {
                                         <li>
                                             <label class="checkmark color3" for="checkmau-@items.Colors.ID">@items.Colors.Name</label>
-                                            <input name="checkmau-@items.Colors.ID" id="checkmau-@items.Colors.ID" type="checkbox">
+                                            <input class="css-checked" name="checkmau-@items.Colors.ID" id="checkmau-@items.Colors.ID" type="checkbox">
                                         </li>
                                     }
                                 </ul>
                             </div>
-                            <div class="filter__list widget_size d-flex align-items-center">
-                                <h3>Kích cỡ</h3>
+                            <div class="filter__list widget_color d-flex align-items-center">
+                                <h3>Size :</h3>
                                 <ul>
-                                    @foreach (var items in Model.DetailProducts.ToList())
+                                    @foreach (var items in Model.DetailProducts.GroupBy(g => g.ID_Size, g => g.Size.Name, (key, g) => new { ID_Size = key, Size_Name = g.First() }).ToList())
                                     {
                                         <li>
-                                            <a href="javascript:void(0)">@items.Size.Name</a>
+                                            <label class="checkmark color3" for="checksize-@items.ID_Size">@items.Size_Name</label>
+                                            <input class="css-checked" name="checksize-@items.ID_Size" id="checksize-@items.ID_Size" type="checkbox">
                                         </li>
                                     }
                                 </ul>
