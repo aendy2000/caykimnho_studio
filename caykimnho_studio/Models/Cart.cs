@@ -24,6 +24,9 @@ namespace caykimnho_studio.Models
         public Nullable<int> ID_User { get; set; }
         public Nullable<int> Total_Product { get; set; }
         public Nullable<decimal> Total_Price { get; set; }
+        public Nullable<int> First_Product_ID { get; set; }
+        public string First_Product_Name { get; set; }
+        public string First_Product_Images { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart_Detail> Cart_Detail { get; set; }

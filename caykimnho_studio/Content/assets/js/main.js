@@ -319,7 +319,6 @@
 
     //Quick View Product
     $('[id^="quickViewProduct-"]').on('click', function () {
-        $('#Loaders').fadeIn('slow');
         var id = $(this).attr('name');
         var formData = new FormData();
         formData.append('id', id);

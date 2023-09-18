@@ -4,7 +4,7 @@
     var categories = Session["lst-category"] as IEnumerable<Categories>;
     ViewBag.Title = "Trang chủ - Cây Kim Nhỏ";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    int totalCart = Convert.ToInt32(Session["cart-local"].ToString());
+    int totalCart = Convert.ToInt32(Session["cart-total"].ToString());
 }
 
 <!--slider area start-->
@@ -143,7 +143,7 @@
                     }
                 </ul>
                 <div class="all_product">
-                    <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("product", "home")">Xem thêm</a>
+                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("product", "home")">Xem thêm</a>
                 </div>
             </div>
         </div>
@@ -196,7 +196,7 @@
                                             </ul>
                                         </div>
                                         <h4 class="product_name">
-                                            <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("productdetail", "home", new {id = item.ID})">@item.Name</a>
+                                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.ID})">@item.Name</a>
                                         </h4>
                                         <div class="price_box">
                                             @{
@@ -213,7 +213,7 @@
                                             }
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" id="quickViewProduct-@item.ID" name="@item.ID">Xem Nhanh</a>
+                                            <a onclick="$('#Loaders').fadeIn('slow');" class="btn btn-primary" id="quickViewProduct-@item.ID" name="@item.ID">Xem Nhanh</a>
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -271,7 +271,7 @@
                                                 </ul>
                                             </div>
                                             <h4 class="product_name">
-                                                <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("productdetail", "home", new {id = item.ID})">@item.Name</a>
+                                                <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.ID})">@item.Name</a>
                                             </h4>
                                             <div class="price_box">
                                                 @{
@@ -288,7 +288,7 @@
                                                 }
                                             </div>
                                             <div class="add_to_cart">
-                                                <a class="btn btn-primary" id="quickViewProduct-@item.ID" name="@item.ID">Xem Nhanh</a>
+                                                <a onclick="$('#Loaders').fadeIn('slow');" class="btn btn-primary" id="quickViewProduct-@item.ID" name="@item.ID">Xem Nhanh</a>
                                             </div>
                                         </figcaption>
                                     </figure>

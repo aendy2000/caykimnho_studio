@@ -1,7 +1,16 @@
 ﻿@using caykimnho_studio.Models
 @{
+    caykimnhoEntities models = new caykimnhoEntities();
+    var colors = models.Colors.ToList();
+    var sizes = models.Size.ToList();
     var categories = Session["lst-category"] as IEnumerable<Categories>;
-    int totalCart = Convert.ToInt32(Session["cart-local"].ToString());
+    int totalCart = Convert.ToInt32(Session["cart-total"].ToString());
+    var cart = new List<ShoppingCart>();
+    if (Session["cart-local"] != null)
+    {
+        cart = Session["cart-local"] as List<ShoppingCart>;
+    }
+    decimal totalPrices = 0;
 }
 
 <!doctype html>
@@ -80,7 +89,6 @@
     <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 
     <!-- Structured Data  -->
-
 </head>
 
 <body>
@@ -88,65 +96,143 @@
     <script>
         $('#Loaders').fadeIn('slow');
     </script>
+
     <!--offcanvas menu area start-->
     <div class="body_overlay">
 
     </div>
 
     <!--mini cart-->
-    <div class="mini_cart">
+    <div id="minicart" class="mini_cart">
         <div class="cart_gallery">
             <div class="cart_close">
                 <div class="cart_text">
-                    <h3>GIỎ HÀNG</h3>
+                    <h3 name="@totalCart" id="giohangsoluong3">GIỎ HÀNG (@totalCart)</h3>
                 </div>
                 <div class="mini_cart_close">
                     <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
                 </div>
             </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="~/Content/assets/img/product/product1.jpg" alt=""></a>
+            @foreach (var item in cart.OrderByDescending(o => o.ID).ToList())
+            {
+                totalPrices += item.Total_Price;
+                int index = 0;
+                int indexItem = item.ShoppingCartDetail.Count;
+                <div class="row cart_item">
+                    <div style="padding: 5px; border-bottom: 1px solid #ededed; " class="col-12">
+                        <div class="row">
+                            <div class="col-3">
+                                <div style="margin-bottom: 10px" class="cart_img">
+                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@item.First_Product_Images" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div style="margin-bottom: 10px" class="cart_info">
+                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})">@item.First_Product_Name</a>
+                                    <p><span>@item.Total_Product Sản Phẩm&ensp;|&ensp;@item.Total_Price.ToString("0,0")đ </span></p>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; margin-left: -10px" class="col-1 cart_remove">
+                                <a href="#"><i class="icon-close icons"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    @foreach (var items in item.ShoppingCartDetail.ToList())
+                    {
+                        int idcolor = items.ID_Color;
+                        int idsize = items.ID_Size;
+                        index++;
+                        <div class="col-12">
+                            @if (indexItem == index)
+                            {
+                                <div style="padding: 5px;" class="row">
+                                    <div class="col-2">
+                                        <div style="margin-top: 2.5px" class="cart_img_child">
+                                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="cart_info">
+                                            <p style="margin-bottom: -5px">@(colors.Find(f => f.ID == idcolor).Name), @(sizes.Find(f => f.ID == idsize).Name)</p>
+                                            <p><span>@items.Product_Quantity&ensp;×&ensp;@((items.Product_Price - (items.Product_Price * items.Product_Sale)).ToString("0,0"))đ&ensp;|&ensp;Tổng: @((items.Product_Quantity * (items.Product_Price - (items.Product_Price * items.Product_Sale))).ToString("0,0"))đ</span></p>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; align-items: center;" class="col-1 cart_remove">
+                                        <a href="#"><i class="icon-close icons"></i></a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div style="padding: 5px; border-bottom: 1px solid #ededed;" class="row">
+                                    <div class="col-2">
+                                        <div style="margin-top: 2.5px" class="cart_img_child">
+                                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="cart_info">
+                                            <p style="margin-bottom: -5px">@(colors.Find(f => f.ID == idcolor).Name), @(sizes.Find(f => f.ID == idsize).Name)</p>
+                                            <p><span>@items.Product_Quantity&ensp;×&ensp;@((items.Product_Price - (items.Product_Price * items.Product_Sale)).ToString("0,0"))đ&ensp;|&ensp;Tổng: @((items.Product_Quantity * (items.Product_Price - (items.Product_Price * items.Product_Sale))).ToString("0,0"))đ</span></p>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; align-items: center;" class="col-1 cart_remove">
+                                        <a href="#"><i class="icon-close icons"></i></a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
-                <div class="cart_info">
-                    <a href="#">Primis In Faucibus</a>
-                    <p>1 x <span> $65.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="~/Content/assets/img/product/product2.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Letraset Sheets</a>
-                    <p>1 x <span> $60.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
+            }
         </div>
         <div class="mini_cart_table">
             <div class="cart_table_border">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-                <div class="cart_total mt-10">
-                    <span>total:</span>
-                    <span class="price">$125.00</span>
-                </div>
+
+                @if (totalCart <= 0)
+                {
+                    <div style="text-align: center; margin: 50px 0 50px 0">Chưa có sản phẩm nào :(</div>
+                }
+                else if (totalCart > 3)
+                {
+                    <div class="cart_total">
+                        <span>Tạm tính:</span>
+                        <span class="price">@totalPrices.ToString("0,0")đ</span>
+                    </div>
+                    <div class="cart_total">
+                        <span>Phí vận chuyển:</span>
+                        <span class="price">Miễn phí</span>
+                    </div>
+                    <br />
+                    <div class="cart_total mt-10">
+                        <span>Tổng:</span>
+                        <span class="price">@totalPrices.ToString("0,0")đ</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="cart_total">
+                        <span>Tạm tính:</span>
+                        <span class="price">@totalPrices.ToString("0,0")đ</span>
+                    </div>
+                    <div class="cart_total">
+                        <span>Phí vận chuyển:</span>
+                        <span class="price">30.000đ</span>
+                    </div>
+                    <br />
+                    <div class="cart_total">
+                        <span>Tổng:</span>
+                        <span class="price">@((totalPrices + 30000).ToString("0,0"))đ</span>
+                    </div>
+                }
             </div>
         </div>
-        <div class="mini_cart_footer">
+        <div style="margin-bottom: 50px" class="mini_cart_footer">
             <div class="cart_button">
-                <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
+                <a href="cart.html"><i class="fa fa-shopping-cart"></i>&ensp;Xem giỏ hàng</a>
             </div>
             <div class="cart_button">
-                <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
+                <a href="checkout.html"><i class="fa fa-sign-in"></i>&ensp;Đặt hàng</a>
             </div>
         </div>
     </div>
@@ -195,23 +281,23 @@
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children active">
-                                    <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("index", "home")">Trang chủ</a>
+                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")">Trang chủ</a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("product", "home")">Sản phẩm</a>
+                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("product", "home")">Sản phẩm</a>
                                     <ul class="sub-menu">
                                         @foreach (var item in categories)
                                         {
-                                            <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">@item.Name</a></li>
+                                            <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">@item.Name</a></li>
                                         }
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("about", "home")">Giới thiệu</a>
+                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("about", "home")">Giới thiệu</a>
                                 </li>
-                                <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">Chương trình Khuyến Mãi</a></li>
-                                <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">Chính sách đổi trả</a></li>
-                                <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">Tra cứu đơn hàng</a></li>
+                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Chương trình Khuyến Mãi</a></li>
+                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Chính sách đổi trả</a></li>
+                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Tra cứu đơn hàng</a></li>
                             </ul>
                         </div>
                     </div>
@@ -228,7 +314,7 @@
                 class="btn btn-primary canvas_open">
             <i style="font-size: 16px; color: white;" class="icon-menu icons"></i>
         </button>
-        <a role="button" onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("index", "home")"
+        <a role="button" onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")"
            style="margin-top: 5px; margin-bottom: 5px ;border: 1px; border-radius: 100px; height: 20%; width: 24%;"
            class="btn btn-primary">
             <i style="font-size: 16px; color: white;" class="icon-home icons"></i>
@@ -238,7 +324,7 @@
             <i style="font-size: 16px; color: white;"
                class="icon-basket-loaded icons">
             </i>
-            <span class="item_count">@totalCart</span>
+            <span id="giohangsoluong" class="item_count">@totalCart</span>
         </button>
 
     </div>
@@ -301,7 +387,7 @@
                                 <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
                             </div>
                             <div class="header_logo">
-                                <a class="sticky_none" onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("index", "home")">
+                                <a class="sticky_none" onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")">
                                     <img width="90px"
                                          style="margin-top: -20px; margin-bottom: -20px;" src="~/Content/assets/img/logo/logos.png"
                                          alt="">
@@ -311,21 +397,21 @@
                             <div class="main_menu d-none d-lg-block">
                                 <nav>
                                     <ul class="d-flex">
-                                        <li><a class="active" onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("index", "home")">Trang chủ</a> </li>
+                                        <li><a class="active" onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")">Trang chủ</a> </li>
                                         <li>
-                                            <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("product", "home")">Sản phẩm</a>
+                                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("product", "home")">Sản phẩm</a>
                                             <ul class="sub_menu">
                                                 @foreach (var item in categories)
                                                 {
-                                                    <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">@item.Name</a></li>
+                                                    <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">@item.Name</a></li>
                                                 }
                                             </ul>
                                         </li>
-                                        <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("about", "home")">Giới thiệu</a></li>
+                                        <li><a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("about", "home")">Giới thiệu</a></li>
 
-                                        <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">Khuyến Mãi</a></li>
-                                        <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">Đổi trả</a></li>
-                                        <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">đơn hàng</a></li>
+                                        <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Khuyến Mãi</a></li>
+                                        <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Đổi trả</a></li>
+                                        <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">đơn hàng</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -350,7 +436,7 @@
                                         <a class="shopping_carts_click">
                                             <i class="icon-basket-loaded icons"></i>
                                         </a>
-                                        <span class="item_count">@totalCart</span>
+                                        <span id="giohangsoluong2" class="item_count">@totalCart</span>
                                     </li>
                                 </ul>
                             </div>
@@ -386,7 +472,7 @@
                 <div class="col-lg-5 col-md-5 col-sm-5">
                     <div class="footer_widget_list">
                         <div class="footer_logo">
-                            <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("Index", "Home")"><img src="~/Content/assets/img/logo/logos.png" width="120px" alt=""></a>
+                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("Index", "Home")"><img src="~/Content/assets/img/logo/logos.png" width="120px" alt=""></a>
                         </div>
                         <div class="footer_contact">
                             <div class="footer_contact_list">
@@ -410,10 +496,10 @@
                     <div class="footer_widget_list text-right">
                         <div class="footer_menu">
                             <ul class="d-flex justify-content-end">
-                                <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
-                                <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("Product", "Home")">Sản phẩm</a></li>
-                                <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("About", "Home")">Giới thiệu</a></li>
-                                <li><a onclick="{ $('#Loaders').fadeIn('slow') }" href="#">CTKM</a></li>
+                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("Product", "Home")">Sản phẩm</a></li>
+                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("About", "Home")">Giới thiệu</a></li>
+                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">CTKM</a></li>
                             </ul>
                         </div>
                         <div class="footer_social">
@@ -437,7 +523,7 @@
                         </div>
                         <div class="copyright_right">
                             <p>
-                                Copyright © @DateTime.Now.Year <a onclick="{ $('#Loaders').fadeIn('slow') }" href="@Url.Action("index", "home")" target="_blank">
+                                Copyright © @DateTime.Now.Year <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")" target="_blank">
                                     <span>
                                         Cây Kim Nhỏ
                                     </span>
@@ -453,7 +539,6 @@
     <!--footer area end-->
     <!-- JS
     ============================================ -->
-
     <script src="~/Content/assets/js/vendor/popper.js"></script>
     <script src="~/Content/assets/js/vendor/bootstrap.min.js"></script>
     <script src="~/Content/assets/js/slick.min.js"></script>
@@ -470,6 +555,7 @@
     <script src="https://cdn.jsdelivr.net/npm/placeholder-loading/dist/css/placeholder-loading.min.css"></script>
     <!-- Main JS -->
     <script src="~/Content/assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(window).on('load', function () {

@@ -13,6 +13,9 @@
           <Property Name="ID_User" Type="int" />
           <Property Name="Total_Product" Type="int" />
           <Property Name="Total_Price" Type="money" />
+          <Property Name="First_Product_ID" Type="int" />
+          <Property Name="First_Product_Name" Type="nvarchar(max)" />
+          <Property Name="First_Product_Images" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Cart_Detail">
           <Key>
@@ -31,6 +34,7 @@
           <Property Name="Add_Date" Type="datetime" Nullable="false" />
           <Property Name="ID_Color" Type="int" Nullable="false" />
           <Property Name="ID_Size" Type="int" Nullable="false" />
+          <Property Name="Product_Images" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -248,6 +252,9 @@
           <Property Name="ID_User" Type="Int32" />
           <Property Name="Total_Product" Type="Int32" />
           <Property Name="Total_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="First_Product_ID" Type="Int32" />
+          <Property Name="First_Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="First_Product_Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Cart" FromRole="Cart" ToRole="Cart_Detail" />
         </EntityType>
         <EntityType Name="Cart_Detail">
@@ -267,6 +274,7 @@
           <Property Name="Add_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ID_Color" Type="Int32" Nullable="false" />
           <Property Name="ID_Size" Type="Int32" Nullable="false" />
+          <Property Name="Product_Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Detail_Cart" FromRole="Cart_Detail" ToRole="Cart" />
           <NavigationProperty Name="Colors" Relationship="Self.FK_Cart_Detail_Colors" FromRole="Cart_Detail" ToRole="Colors" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Cart_Detail_Products" FromRole="Cart_Detail" ToRole="Products" />
@@ -501,6 +509,9 @@
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="Total_Product" ColumnName="Total_Product" />
                 <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="First_Product_ID" ColumnName="First_Product_ID" />
+                <ScalarProperty Name="First_Product_Name" ColumnName="First_Product_Name" />
+                <ScalarProperty Name="First_Product_Images" ColumnName="First_Product_Images" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -520,6 +531,7 @@
                 <ScalarProperty Name="Add_Date" ColumnName="Add_Date" />
                 <ScalarProperty Name="ID_Color" ColumnName="ID_Color" />
                 <ScalarProperty Name="ID_Size" ColumnName="ID_Size" />
+                <ScalarProperty Name="Product_Images" ColumnName="Product_Images" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
