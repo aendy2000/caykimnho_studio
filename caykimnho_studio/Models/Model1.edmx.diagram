@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2d6ae1876d4f4d1986cec37fdef53adc" Name="Diagram1">
-        <EntityTypeShape EntityType="caykimnhoModel.Cart" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="caykimnhoModel.Cart_Detail" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="caykimnhoModel.Categories" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="caykimnhoModel.Colors" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="caykimnhoModel.DetailProducts" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="caykimnhoModel.Products" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="caykimnhoModel.Size" Width="1.5" PointX="0.75" PointY="16.375" IsExpanded="true" />
-        <AssociationConnector Association="caykimnhoModel.FK_Cart_Detail_Cart" ManuallyRouted="false" />
-        <AssociationConnector Association="caykimnhoModel.FK_Cart_Detail_Colors" ManuallyRouted="false" />
-        <AssociationConnector Association="caykimnhoModel.FK_Cart_Detail_Products" ManuallyRouted="false" />
-        <AssociationConnector Association="caykimnhoModel.FK_Cart_Detail_Size" ManuallyRouted="false" />
-        <AssociationConnector Association="caykimnhoModel.FK_Products_Categories" ManuallyRouted="false" />
-        <AssociationConnector Association="caykimnhoModel.FK_Colors_Colors" ManuallyRouted="false" />
-        <AssociationConnector Association="caykimnhoModel.FK_DetailProducts_Colors" ManuallyRouted="false" />
-        <AssociationConnector Association="caykimnhoModel.FK_DetailProducts_Products" ManuallyRouted="false" />
-        <AssociationConnector Association="caykimnhoModel.FK_DetailProducts_Size" ManuallyRouted="false" />
+      <Diagram DiagramId="19a04850b90e47af9f103cae4e7b49aa" Name="Diagram1">
+        <EntityTypeShape EntityType="aendysho_caykimnhoModel.Cart" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aendysho_caykimnhoModel.Cart_Detail" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="aendysho_caykimnhoModel.Categories" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aendysho_caykimnhoModel.Colors" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aendysho_caykimnhoModel.DetailProducts" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aendysho_caykimnhoModel.Products" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aendysho_caykimnhoModel.Size" Width="1.5" PointX="0.75" PointY="16.375" IsExpanded="true" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_Cart_Detail_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_Cart_Detail_Colors" ManuallyRouted="false" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_Cart_Detail_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_Cart_Detail_Size" ManuallyRouted="false" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_Colors_Colors" ManuallyRouted="false" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_DetailProducts_Colors" ManuallyRouted="false" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_DetailProducts_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="aendysho_caykimnhoModel.FK_DetailProducts_Size" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

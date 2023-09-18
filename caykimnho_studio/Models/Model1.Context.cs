@@ -13,10 +13,10 @@ namespace caykimnho_studio.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class caykimnhoEntities : DbContext
+    public partial class aendysho_caykimnhoEntities : DbContext
     {
-        public caykimnhoEntities()
-            : base("name=caykimnhoEntities")
+        public aendysho_caykimnhoEntities()
+            : base("name=aendysho_caykimnhoEntities")
         {
         }
     

@@ -12,7 +12,7 @@ namespace caykimnho_studio.CheckRequest
         {
             if (filterContext.HttpContext.Session["lst-category"] == null)
             {
-                caykimnhoEntities model = new caykimnhoEntities();
+                aendysho_caykimnhoEntities model = new aendysho_caykimnhoEntities();
                 filterContext.HttpContext.Session["lst-category"] = model.Categories.ToList();
             }
 
