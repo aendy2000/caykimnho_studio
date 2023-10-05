@@ -84,7 +84,7 @@
                 breakpoint: 576,
                 settings: {
                     slidesToShow: 3,
-                    vertical: true,
+                    vertical: false,
                     arrows: false,
                 }
             },
@@ -115,7 +115,7 @@
             {
                 breakpoint: 576,
                 settings: {
-                    vertical: true,
+                    vertical: false,
                 }
             },
         ]
@@ -377,7 +377,7 @@
                             breakpoint: 576,
                             settings: {
                                 slidesToShow: 3,
-                                vertical: true,
+                                vertical: false,
                                 arrows: false,
                             }
                         },
@@ -408,7 +408,7 @@
                         {
                             breakpoint: 576,
                             settings: {
-                                vertical: true,
+                                vertical: false,
                             }
                         },
                     ]
