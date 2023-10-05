@@ -16,6 +16,7 @@
 <!doctype html>
 <html class="no-js" lang="vi">
 <head>
+    <link rel="stylesheet" href="~/Content/Loading/loading.css">
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Cây Kim Nhỏ</title>
@@ -58,15 +59,13 @@
     <meta property="og:description"
           content="Cây Kim Nhỏ - Quần áo nữ handmade siêu cá tính, dễ thương, xinh xắn, phong cách thời thượng cho mọi lứa tuổi." />
     <script src="~/Content/assets/js/vendor/jquery-3.4.1.min.js"></script>
-    <link href="~/Content/Loading/loading.css" rel="stylesheet" />
     <!-- Add site Favicon -->
-    <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-192x192.png"
+    <link rel="icon" href="~/Content/Loading/logoload.png" sizes="32x32" />
+    <link rel="icon" href="~/Content/Loading/logoload.png"
           sizes="192x192" />
-    <link rel="apple-touch-icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-180x180.png" />
+    <link rel="apple-touch-icon" href="~/Content/Loading/logoload.png" />
     <meta name="msapplication-TileImage"
-          content="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-270x270.png" />
-
+          content="~/Content/Loading/logoload.png" />
 
     <!-- CSS
     ========================= -->
@@ -86,15 +85,15 @@
 
     <!--modernizr min js here-->
     <script src="~/Content/assets/js/vendor/modernizr-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
-
     <!-- Structured Data  -->
 </head>
 
 <body>
-    <div class="loaders" id="Loaders"></div>
+    <div class="divLoaders" id="divLoaders">
+        <span class="loaders" id="Loaders"></span>
+    </div>
     <script>
-        $('#Loaders').fadeIn('slow');
+        $('#divLoaders').fadeIn(300);
     </script>
 
     <!--offcanvas menu area start-->
@@ -123,17 +122,17 @@
                         <div class="row">
                             <div class="col-3">
                                 <div style="margin-bottom: 10px" class="cart_img">
-                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@item.First_Product_Images" alt=""></a>
+                                    <a href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@item.First_Product_Images" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-8">
                                 <div style="margin-bottom: 10px" class="cart_info">
-                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})">@item.First_Product_Name</a>
+                                    <a href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})">@item.First_Product_Name</a>
                                     <p><span>@item.Total_Product Sản Phẩm&ensp;|&ensp;@item.Total_Price.ToString("0,0")đ </span></p>
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: center; margin-left: -10px" class="col-1 cart_remove">
-                                <a href="#"><i class="icon-close icons"></i></a>
+                                <a id="xoasanphamchinh-@item.ID" name="@item.ID"><i class="icon-close icons"></i></a>
                             </div>
                         </div>
                     </div>
@@ -148,7 +147,7 @@
                                 <div style="padding: 5px;" class="row">
                                     <div class="col-2">
                                         <div style="margin-top: 2.5px" class="cart_img_child">
-                                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
+                                            <a onclick="$('#divLoaders').fadeIn(300);" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="col-9">
@@ -158,7 +157,7 @@
                                         </div>
                                     </div>
                                     <div style="display: flex; justify-content: center; align-items: center;" class="col-1 cart_remove">
-                                        <a href="#"><i class="icon-close icons"></i></a>
+                                        <a id="xoasanphamcon-@item.ID" name="@item.ID-@items.ID_Size-@items.ID_Color"><i class="icon-close icons"></i></a>
                                     </div>
                                 </div>
                             }
@@ -167,7 +166,7 @@
                                 <div style="padding: 5px; border-bottom: 1px solid #ededed;" class="row">
                                     <div class="col-2">
                                         <div style="margin-top: 2.5px" class="cart_img_child">
-                                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
+                                            <a href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="col-9">
@@ -177,7 +176,7 @@
                                         </div>
                                     </div>
                                     <div style="display: flex; justify-content: center; align-items: center;" class="col-1 cart_remove">
-                                        <a href="#"><i class="icon-close icons"></i></a>
+                                        <a id="xoasanphamcon-@item.ID" name="@item.ID-@items.ID_Size-@items.ID_Color"><i class="icon-close icons"></i></a>
                                     </div>
                                 </div>
                             }
@@ -281,23 +280,23 @@
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children active">
-                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")">Trang chủ</a>
+                                    <a href="@Url.Action("index", "home")">Trang chủ</a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("product", "home")">Sản phẩm</a>
+                                    <a href="@Url.Action("product", "home")">Sản phẩm</a>
                                     <ul class="sub-menu">
                                         @foreach (var item in categories)
                                         {
-                                            <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">@item.Name</a></li>
+                                            <li><a href="#">@item.Name</a></li>
                                         }
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("about", "home")">Giới thiệu</a>
+                                    <a href="@Url.Action("about", "home")">Giới thiệu</a>
                                 </li>
-                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Chương trình Khuyến Mãi</a></li>
-                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Chính sách đổi trả</a></li>
-                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Tra cứu đơn hàng</a></li>
+                                <li><a href="#">Chương trình Khuyến Mãi</a></li>
+                                <li><a href="#">Chính sách đổi trả</a></li>
+                                <li><a href="#">Tra cứu đơn hàng</a></li>
                             </ul>
                         </div>
                     </div>
@@ -314,7 +313,7 @@
                 class="btn btn-primary canvas_open">
             <i style="font-size: 16px; color: white;" class="icon-menu icons"></i>
         </button>
-        <a role="button" onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")"
+        <a role="button" href="@Url.Action("index", "home")"
            style="margin-top: 5px; margin-bottom: 5px ;border: 1px; border-radius: 100px; height: 20%; width: 24%;"
            class="btn btn-primary">
             <i style="font-size: 16px; color: white;" class="icon-home icons"></i>
@@ -387,7 +386,7 @@
                                 <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
                             </div>
                             <div class="header_logo">
-                                <a class="sticky_none" onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")">
+                                <a class="sticky_none" href="@Url.Action("index", "home")">
                                     <img width="90px"
                                          style="margin-top: -20px; margin-bottom: -20px;" src="~/Content/assets/img/logo/logos.png"
                                          alt="">
@@ -397,21 +396,21 @@
                             <div class="main_menu d-none d-lg-block">
                                 <nav>
                                     <ul class="d-flex">
-                                        <li><a class="active" onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")">Trang chủ</a> </li>
+                                        <li><a class="active" href="@Url.Action("index", "home")">Trang chủ</a> </li>
                                         <li>
-                                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("product", "home")">Sản phẩm</a>
+                                            <a href="@Url.Action("product", "home")">Sản phẩm</a>
                                             <ul class="sub_menu">
                                                 @foreach (var item in categories)
                                                 {
-                                                    <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">@item.Name</a></li>
+                                                    <li><a href="#">@item.Name</a></li>
                                                 }
                                             </ul>
                                         </li>
-                                        <li><a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("about", "home")">Giới thiệu</a></li>
+                                        <li><a href="@Url.Action("about", "home")">Giới thiệu</a></li>
 
-                                        <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Khuyến Mãi</a></li>
-                                        <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">Đổi trả</a></li>
-                                        <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">đơn hàng</a></li>
+                                        <li><a href="#">Khuyến Mãi</a></li>
+                                        <li><a href="#">Đổi trả</a></li>
+                                        <li><a href="#">đơn hàng</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -472,7 +471,7 @@
                 <div class="col-lg-5 col-md-5 col-sm-5">
                     <div class="footer_widget_list">
                         <div class="footer_logo">
-                            <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("Index", "Home")"><img src="~/Content/assets/img/logo/logos.png" width="120px" alt=""></a>
+                            <a href="@Url.Action("Index", "Home")"><img src="~/Content/assets/img/logo/logos.png" width="120px" alt=""></a>
                         </div>
                         <div class="footer_contact">
                             <div class="footer_contact_list">
@@ -496,10 +495,10 @@
                     <div class="footer_widget_list text-right">
                         <div class="footer_menu">
                             <ul class="d-flex justify-content-end">
-                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
-                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("Product", "Home")">Sản phẩm</a></li>
-                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("About", "Home")">Giới thiệu</a></li>
-                                <li><a onclick="$('#Loaders').fadeIn('slow');" href="#">CTKM</a></li>
+                                <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                                <li><a href="@Url.Action("Product", "Home")">Sản phẩm</a></li>
+                                <li><a href="@Url.Action("About", "Home")">Giới thiệu</a></li>
+                                <li><a href="#">CTKM</a></li>
                             </ul>
                         </div>
                         <div class="footer_social">
@@ -523,7 +522,7 @@
                         </div>
                         <div class="copyright_right">
                             <p>
-                                Copyright © @DateTime.Now.Year <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("index", "home")" target="_blank">
+                                Copyright © @DateTime.Now.Year <a href="@Url.Action("index", "home")" target="_blank">
                                     <span>
                                         Cây Kim Nhỏ
                                     </span>
@@ -549,21 +548,13 @@
     <script src="~/Content/assets/js/jquery.nice-select.js"></script>
     <script src="~/Content/assets/js/tippy-bundle.umd.js"></script>
     <script src="~/Content/assets/js/jquery-ui.min.js"></script>
-    <script src="~/Content/assets/js/jquery.instagramFeed.min.js"></script>
     <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
     <script src="~/Content/assets/js/mailchimp-ajax.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/placeholder-loading/dist/css/placeholder-loading.min.css"></script>
     <!-- Main JS -->
     <script src="~/Content/assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        $(window).on('load', function () {
-            setTimeout(function () {
-                $('#Loaders').fadeOut('slow');
-            }, 100);
-        });
-    </script>
+    <script src="~/Validation/deleteCart.js"></script>
 </body>
 
 </html>

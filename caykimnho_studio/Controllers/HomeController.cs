@@ -162,9 +162,65 @@ namespace caykimnho_studio.Controllers
             {
 
             }
-            
+
             return PartialView("_minicart");
         }
+        [HttpPost]
+        public ActionResult removeCartMainProduct(int id)
+        {
+            var lstLocalCart = Session["cart-local"] as List<ShoppingCart>;
+
+            var mainProduct = lstLocalCart.Find(p => p.ID == id);
+            if (mainProduct == null)
+            {
+                return Content("null");
+            }
+
+            lstLocalCart.Remove(mainProduct);
+            Session["cart-local"] = lstLocalCart;
+            Session["cart-total"] = Convert.ToInt32(Session["cart-total"].ToString()) - 1;
+
+            return PartialView("_minicart");
+        }
+
+        [HttpPost]
+        public ActionResult removeCartChildProduct(string contents)
+        {
+            var lstLocalCart = Session["cart-local"] as List<ShoppingCart>;
+            int idPro = Convert.ToInt32(contents.Split('-')[0]);
+            int idSize = Convert.ToInt32(contents.Split('-')[1]);
+            int idColor = Convert.ToInt32(contents.Split('-')[2]);
+
+            var mainProduct = lstLocalCart.Find(p => p.First_Product_ID == idPro);
+            if (mainProduct == null)
+            {
+                return Content("null");
+            }
+
+            var detailProduLstct = mainProduct.ShoppingCartDetail.ToList();
+            if (detailProduLstct.Count <= 1)
+            {
+                lstLocalCart.Remove(mainProduct);
+                Session["cart-local"] = lstLocalCart;
+                Session["cart-total"] = Convert.ToInt32(Session["cart-total"].ToString()) - 1;
+
+                return PartialView("_minicart");
+            }
+            else
+            {
+                var detailPro = detailProduLstct.Find(p => p.ID_Products == idPro && p.ID_Size == idSize && p.ID_Color == idColor);
+                if (detailPro == null)
+                {
+                    return Content("null");
+                }
+
+                detailProduLstct.Remove(detailPro);
+
+                Session["cart-local"] = lstLocalCart;
+                return PartialView("_minicart");
+            }
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

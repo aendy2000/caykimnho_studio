@@ -20,7 +20,7 @@
                 <h3 name="@totalCart" id="giohangsoluong3">GIỎ HÀNG (@totalCart)</h3>
             </div>
             <div class="mini_cart_close">
-                <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
+                <a><i class="icon-close icons"></i></a>
             </div>
         </div>
         @foreach (var item in cart.OrderByDescending(o => o.ID).ToList())
@@ -33,17 +33,17 @@
                     <div class="row">
                         <div class="col-3">
                             <div style="margin-bottom: 10px" class="cart_img">
-                                <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@item.First_Product_Images" alt=""></a>
+                                <a href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@item.First_Product_Images" alt=""></a>
                             </div>
                         </div>
                         <div class="col-8">
                             <div style="margin-bottom: 10px" class="cart_info">
-                                <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})">@item.First_Product_Name</a>
+                                <a href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})">@item.First_Product_Name</a>
                                 <p><span>@item.Total_Product Sản Phẩm&ensp;|&ensp;@item.Total_Price.ToString("0,0")đ </span></p>
                             </div>
                         </div>
                         <div style="display: flex; justify-content: center; margin-left: -10px" class="col-1 cart_remove">
-                            <a href="#"><i class="icon-close icons"></i></a>
+                            <a id="xoasanphamchinh-@item.ID" name="@item.ID"><i class="icon-close icons"></i></a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                             <div style="padding: 5px;" class="row">
                                 <div class="col-2">
                                     <div style="margin-top: 2.5px" class="cart_img_child">
-                                        <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
+                                        <a onclick="viewload()" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-9">
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; justify-content: center; align-items: center;" class="col-1 cart_remove">
-                                    <a href="#"><i class="icon-close icons"></i></a>
+                                    <a id="xoasanphamcon-@item.ID" name="@item.ID-@items.ID_Size-@items.ID_Color"><i class="icon-close icons"></i></a>
                                 </div>
                             </div>
                         }
@@ -77,7 +77,7 @@
                             <div style="padding: 5px; border-bottom: 1px solid #ededed;" class="row">
                                 <div class="col-2">
                                     <div style="margin-top: 2.5px" class="cart_img_child">
-                                        <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
+                                        <a onclick="viewload()" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-9">
@@ -87,7 +87,7 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; justify-content: center; align-items: center;" class="col-1 cart_remove">
-                                    <a href="#"><i class="icon-close icons"></i></a>
+                                    <a id="xoasanphamcon-@item.ID" name="@item.ID-@items.ID_Size-@items.ID_Color"><i class="icon-close icons"></i></a>
                                 </div>
                             </div>
                         }
@@ -147,3 +147,4 @@
     </div>
 </div>
 <!--mini cart end-->
+<script src="~/Validation/deleteCart.js"></script>

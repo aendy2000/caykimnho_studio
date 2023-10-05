@@ -19,6 +19,33 @@
         dataBackgroundImage();
     });
 
+    $(window).bind("pageshow", function (event) {
+        $('#divLoaders').fadeOut('slow');
+    });
+
+    $(window).ready(function () {
+        $('a').on('click', function () {
+            var hrf = $(this).attr('href');
+            if (hrf !== undefined && hrf !== "#" && hrf.indexOf('#') == -1 && hrf !== "javascript:void(0)") {
+                var targ = $(this).attr('target');
+                if (targ == "_blank") {
+                    window.open(hrf, targ);
+                }
+                else {
+                    $('#divLoaders').fadeIn(300);
+                    setTimeout(function () {
+                        location.href = hrf;
+                    }, 300);
+                    setTimeout(function () {
+                        if ($('#divLoaders').css('display') !== 'none') {
+                            $('#divLoaders').fadeOut('slow');
+                        }
+                    }, 3000);
+                }
+                return false;
+            }
+        });
+    });
 
     /*---stickey menu---*/
     $(window).on('scroll', function () {
@@ -57,7 +84,7 @@
                 breakpoint: 576,
                 settings: {
                     slidesToShow: 3,
-                    vertical: false,
+                    vertical: true,
                     arrows: false,
                 }
             },
@@ -74,7 +101,6 @@
                 }
             },
         ]
-
     });
 
     // Slick Slider Activation
@@ -89,13 +115,11 @@
             {
                 breakpoint: 576,
                 settings: {
-                    vertical: false,
+                    vertical: true,
                 }
             },
         ]
     });
-
-
 
     /*---canvas menu activation---*/
     $('.canvas_open').on('click', function () {
@@ -137,21 +161,6 @@
 
     $(document).ready(function () {
         $('select,.select_option').niceSelect();
-    });
-
-
-    /*instagram activation*/
-    $.instagramFeed({
-        'username': 'portfolio.devitems',
-        'container': "#instagramFeed",
-        'display_profile': false,
-        'display_biography': false,
-        'display_gallery': true,
-        'styling': false,
-        'items': 8,
-        "image_size": "480",
-        'items_per_row': 4,
-        'margin': 2,
     });
 
     /*---  ScrollUp Active ---*/
@@ -319,6 +328,7 @@
 
     //Quick View Product
     $('[id^="quickViewProduct-"]').on('click', function () {
+        $('#divLoaders').fadeIn(300);
         var id = $(this).attr('name');
         var formData = new FormData();
         formData.append('id', id);
@@ -330,9 +340,30 @@
             dataType: "html",
             data: formData
         }).done(function (result) {
-            $('#product-body').replaceWith(result);
+            $('#product-body').html(result);
             $('#modal_product-detail').modal('toggle');
             setTimeout(function () {
+                //Quantity Counter
+                $(".pro-qty").append('<a href="#" class="inc qty-btn">+</a>');
+                $(".pro-qty").prepend('<a href="#" class= "dec qty-btn">-</a>');
+
+                $(".qty-btn").on("click", function (e) {
+                    e.preventDefault();
+                    var $button = $(this);
+                    var oldValue = $button.parent().find("input").val();
+                    if ($button.hasClass("inc")) {
+                        var newVal = parseFloat(oldValue) + 1;
+                    } else {
+                        // Don't allow decrementing below zero
+                        if (oldValue > 1) {
+                            var newVal = parseFloat(oldValue) - 1;
+                        } else {
+                            newVal = 1;
+                        }
+                    }
+                    $button.parent().find("input").val(newVal);
+                });
+
                 $('.zoom_tab_img').slick({
                     centerMode: true,
                     centerPadding: '0',
@@ -346,7 +377,7 @@
                             breakpoint: 576,
                             settings: {
                                 slidesToShow: 3,
-                                vertical: false,
+                                vertical: true,
                                 arrows: false,
                             }
                         },
@@ -377,15 +408,21 @@
                         {
                             breakpoint: 576,
                             settings: {
-                                vertical: false,
+                                vertical: true,
                             }
                         },
                     ]
                 });
-                $('#Loaders').fadeOut('slow');
-
-            }, 200);
+            }, 500);
+            setTimeout(function () {
+                $('#divLoaders').fadeOut('slow');
+            }, 1000);
         });
+        setTimeout(function () {
+            if ($('#divLoaders').css('display') !== 'none') {
+                $('#divLoaders').fadeOut('slow');
+            }
+        }, 3000);
     });
 
 })(jQuery);	

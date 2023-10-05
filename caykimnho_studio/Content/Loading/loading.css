@@ -1,44 +1,79 @@
-﻿.loaders {
-    top: 0;
-    left: 0;
-    position: fixed;
-    background: #FCFCFF;
-    background-image: url('loading.gif');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 20%;
+﻿/*.loaders {
+    background: #E7DFDD url('loading.gif') no-repeat center center;
+    background-size: 10%;
     height: 100%;
     width: 100%;
-    margin: auto;
+    position: fixed;
     z-index: 99999;
+}*/
+
+.divLoaders {
+    background: #d0b585 url('logoload.png') no-repeat center center;
+    background-size: 50px 50px;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1600px) {
-    .loaders {
-        background-size: 20%;
+.loaders {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    border: 3.5px solid;
+    border-color: #FFF #FFF transparent transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    z-index: 9999999;
+}
+
+    .loaders::after,
+    .loaders::before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        border: 3.5px solid;
+        border-color: transparent transparent #FF3D00 #FF3D00;
+        width: 63px;
+        height: 63px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        animation: rotationBack 0.5s linear infinite;
+        transform-origin: center center;
+    }
+
+    .loaders::before {
+        width: 56.5px;
+        height: 56.5Px;
+        border-color: #FFF #FFF transparent transparent;
+        animation: rotation 1.5s linear infinite;
+    }
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .loaders {
-        background-size: 20%;
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
     }
-}
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .loaders {
-        background-size: 40%;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .loaders {
-        background-size: 40%;
-    }
-}
-
-@media only screen and (max-width: 415px) {
-    .loaders {
-        background-size: 80%;
+    100% {
+        transform: rotate(-360deg);
     }
 }

@@ -101,7 +101,7 @@
 
                         <div class="variant_quantity_btn d-flex">
                             <div class="pro-qty border">
-                                <input id="soluongsanpham" min="1" max="100" type="number" value="1">
+                                <input id="soluongsanpham" min="1" max="100" type="text" value="1">
                             </div>
                             <button id="addgiohang" name="@Model.ID" class="button btn btn-primary"><i class="ion-android-add"></i> Thêm Vào Giỏ hàng</button>
                             <a data-tippy="Thêm vào yêu thích" class="wishlist"><i class="ion-ios-heart"></i></a>
@@ -294,7 +294,7 @@
                                         </ul>
                                     </div>
                                     <h4 class="product_name">
-                                        <a onclick="$('#Loaders').fadeIn('slow');" href="@Url.Action("productdetail", "home", new {id = item.ID})">@item.Name</a>
+                                        <a href="@Url.Action("productdetail", "home", new {id = item.ID})">@item.Name</a>
                                     </h4>
                                     <div class="price_box">
                                         @{
@@ -311,7 +311,7 @@
                                         }
                                     </div>
                                     <div class="add_to_cart">
-                                        <a onclick="$('#Loaders').fadeIn('slow');" class="btn btn-primary" href="@Url.Action("productdetail", "home", new { id = item.ID })">Xem Chi Tiết</a>
+                                        <a class="btn btn-primary" href="@Url.Action("productdetail", "home", new { id = item.ID })">Xem Chi Tiết</a>
                                     </div>
                                 </figcaption>
                             </figure>

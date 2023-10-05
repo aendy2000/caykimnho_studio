@@ -2,7 +2,7 @@
     $('[id^="checkmaulabel-"]').on('click', function () {
         var id1 = $(this).attr('name');
         $('#valuecolor').val(id1);
-        $('#checkmaulabel-' + id1).css({ "background": "#c8ab78", "color": "white" });
+        $('#checkmaulabel-' + id1).css({ "background": "#d0b585", "color": "white" });
 
         var imagex = $(this).attr('data-images');
         $('#targetImages-' + imagex).click();
@@ -13,7 +13,7 @@
     $('[id^="checksizelabel-"]').on('click', function () {
         var id2 = $(this).attr('name');
         $('#valuesize').val(id2);
-        $('#checksizelabel-' + id2).css({ "background": "#c8ab78", "color": "white" });
+        $('#checksizelabel-' + id2).css({ "background": "#d0b585", "color": "white" });
         bochecksize(id2);
 
     });
@@ -32,7 +32,7 @@
                 toast: true,
                 position: 'top',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -52,7 +52,7 @@
                 toast: true,
                 position: 'top',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -72,7 +72,7 @@
                 toast: true,
                 position: 'top',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -107,7 +107,7 @@
                         toast: true,
                         position: 'top',
                         showConfirmButton: false,
-                        timer: 3000,
+                        timer: 1000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -125,7 +125,7 @@
                         toast: true,
                         position: 'top',
                         showConfirmButton: false,
-                        timer: 3000,
+                        timer: 1000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -151,7 +151,7 @@
                         toast: true,
                         position: 'top',
                         showConfirmButton: false,
-                        timer: 3000,
+                        timer: 1000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
