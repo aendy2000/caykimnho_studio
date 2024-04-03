@@ -1,6 +1,6 @@
 ﻿@using caykimnho_studio.Models
 @{
-    aendysho_caykimnhoEntities models = new aendysho_caykimnhoEntities();
+    CayKimNhoEntities models = new CayKimNhoEntities();
     var colors = models.Colors.ToList();
     var sizes = models.Size.ToList();
     var categories = Session["lst-category"] as IEnumerable<Categories>;
@@ -60,12 +60,12 @@
           content="Cây Kim Nhỏ - Quần áo nữ handmade siêu cá tính, dễ thương, xinh xắn, phong cách thời thượng cho mọi lứa tuổi." />
     <script src="~/Content/assets/js/vendor/jquery-3.4.1.min.js"></script>
     <!-- Add site Favicon -->
-    <link rel="icon" href="~/Content/Loading/logoload.png" sizes="32x32" />
-    <link rel="icon" href="~/Content/Loading/logoload.png"
+    <link rel="icon" href="~/Content/assets/img/logo/logo.png" sizes="32x32" />
+    <link rel="icon" href="~/Content/assets/img/logo/logo.png"
           sizes="192x192" />
-    <link rel="apple-touch-icon" href="~/Content/Loading/logoload.png" />
+    <link rel="apple-touch-icon" href="~/Content/assets/img/logo/logo.png" />
     <meta name="msapplication-TileImage"
-          content="~/Content/Loading/logoload.png" />
+          content="~/Content/assets/img/logo/logo.png" />
 
     <!-- CSS
     ========================= -->
@@ -93,13 +93,14 @@
         <span class="loaders" id="Loaders"></span>
     </div>
     <script>
-        $('#divLoaders').fadeIn(300);
+        $('#divLoaders').fadeIn(200);
     </script>
 
     <!--offcanvas menu area start-->
     <div class="body_overlay">
 
     </div>
+
 
     <!--mini cart-->
     <div id="minicart" class="mini_cart">
@@ -147,7 +148,7 @@
                                 <div style="padding: 5px;" class="row">
                                     <div class="col-2">
                                         <div style="margin-top: 2.5px" class="cart_img_child">
-                                            <a onclick="$('#divLoaders').fadeIn(300);" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
+                                            <a onclick="$('#divLoaders').fadeIn(200);" href="@Url.Action("productdetail", "home", new {id = item.First_Product_ID})"><img src="@items.Product_Images" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="col-9">
@@ -247,7 +248,10 @@
                         </div>
                         <div class="header_contact_info">
                             <ul class="d-flex">
-                                <li class="text-white">
+                                <li class="text-center mb-4">
+                                    <a href="@Url.Action("Index", "Home")"><img style="border-radius: 50%; border: 3px solid #d0b585; " src="~/Content/assets/img/logo/logo.png" width="80px" alt=""></a>
+                                </li>
+                                <li class="text-white" style="line-height: 0;">
                                     <i class="icons icon-phone"></i> <a href="tel:0971568656">
                                         0971 568 656
                                     </a>
@@ -277,7 +281,7 @@
                             </ul>
                         </div>
                         <br />
-                        <div id="menu" class="text-left ">
+                        <div id="menu" class="text-center mt-3">
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children active">
                                     <a href="@Url.Action("index", "home")">Trang chủ</a>
@@ -287,7 +291,7 @@
                                     <ul class="sub-menu">
                                         @foreach (var item in categories)
                                         {
-                                            <li><a href="#">@item.Name</a></li>
+                                            <li><a class="ml-5" href="#">@item.Name</a></li>
                                         }
                                     </ul>
                                 </li>
@@ -306,7 +310,7 @@
     </div>
 
     <!-- Munu home mobile -->
-    <div style="width: 98% ; padding-top: 10px;background-color: white; border-top-right-radius: 15px; border-top-left-radius: 15px;"
+    <div style="width: 100% ; padding-top: 10px;background-color: white; border-top-right-radius: 15px; border-top-left-radius: 15px;"
          class="mobile-bottom-navigation">
 
         <button style="margin-top: 5px; margin-bottom: 5px; margin-left: 5px ;border: 1px; border-radius: 100px; height: 20%; width: 24%;"
@@ -345,8 +349,14 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="free_shipping_text">
-                                <p class="text-white">MIỄN SHIP VỚI ĐƠN HÀNG TỪ 3 SẢN PHẨM</p>
+                            <div class="free_shipping_text text-center">
+                                <div class="slick-header_top">
+                                    <p class="text-white">MIỄN SHIP VỚI ĐƠN HÀNG TỪ 3 SẢN PHẨM</p>
+                                    <p class="text-white">MIỄN PHÍ ĐỔI TRẢ TRONG VÒNG 3 NGÀY</p>
+                                    <p class="text-white">HỖ TRỢ / TƯ VẤN KHÁCH HÀNG 24/7</p>
+                                    <p class="text-white">PHƯƠNG THỨC THANH TOÁN LINH HOẠT</p>
+                                    <p class="text-white">PHÁT VOUCHER SIÊU ƯU ĐÃI MỖI NGÀY</p>
+                                </div>
                             </div>
                             <div class="header_top_sidebar d-flex align-items-center">
                                 <div class="header_social d-flex">
@@ -387,9 +397,7 @@
                             </div>
                             <div class="header_logo">
                                 <a class="sticky_none" href="@Url.Action("index", "home")">
-                                    <img width="90px"
-                                         style="margin-top: -20px; margin-bottom: -20px;" src="~/Content/assets/img/logo/logos.png"
-                                         alt="">
+                                    <img style="border-radius: 50%; margin-top: -20px; margin-bottom: -15px; border: 3px solid #d0b585; " src="~/Content/assets/img/logo/logo.png" alt="">
                                 </a>
                             </div>
                             <!--main menu start-->
@@ -431,7 +439,7 @@
                                             <li><a href="#">Contact</a></li>
                                         </ul>
                                     </li>
-                                    <li style="margin-right: 20px;" class="shopping_cart">
+                                    <li style="margin-right: 5px;" class="shopping_cart">
                                         <a class="shopping_carts_click">
                                             <i class="icon-basket-loaded icons"></i>
                                         </a>
@@ -449,7 +457,7 @@
             <div class="search_close">
                 <i class="ion-close-round"></i>
             </div>
-            <form style="border: 1px; " action="#">
+            <form style="margin-top: -15px;" action="#">
                 <input class="border-0" placeholder="Nhập tên sản phẩm cần tìm..." type="text">
                 <button type="submit"><span class="icon-magnifier icons"></span></button>
             </form>
@@ -468,30 +476,28 @@
     <footer class="footer_widgets">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-5">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="footer_widget_list">
                         <div class="footer_logo">
-                            <a href="@Url.Action("Index", "Home")"><img src="~/Content/assets/img/logo/logos.png" width="120px" alt=""></a>
+                            <a href="@Url.Action("Index", "Home")"><img style="border-radius: 50%; border: 3px solid #d0b585; " src="~/Content/assets/img/logo/logo.png" width="80px" alt=""></a>
                         </div>
                         <div class="footer_contact">
                             <div class="footer_contact_list">
                                 <P>
                                     <span>Địa Chỉ Shop:</span>
-                                    79/3 Nguyễn Thị Xiếu,<br />P. Tân Thuận Tây, Q7, HCM
+                                    77 Lý Phục Man, P. Bình Thuận, Q7, HCM
                                 </P>
                             </div>
                             <div class="footer_contact_list">
-                                <p>
-                                    <span>Thông Tin Liên Hệ:</span>
-                                    <a href="tel:0971568656">SĐT: 0971 568 656</a>
-                                    <br />
-                                    <a href="mailto:nhiile2007@gmail.com">Email: nhiile2007@gmail.com</a>
+                                <span>Thông Tin Liên Hệ:</span>
+                                <a href="tel:0971568656">SĐT: 0971 568 656 </a> |
+                                <a href="mailto:nhiile2007@gmail.com"> Email: nhiile2007@gmail.com</a>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-7">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="footer_widget_list text-right">
                         <div class="footer_menu">
                             <ul class="d-flex justify-content-end">
@@ -555,6 +561,7 @@
     <script src="~/Content/assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Validation/deleteCart.js"></script>
+
 </body>
 
 </html>

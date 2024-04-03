@@ -20,7 +20,25 @@
     });
 
     $(window).bind("pageshow", function (event) {
-        $('#divLoaders').fadeOut('slow');
+        $('#divLoaders').fadeOut(200);
+    });
+
+    $(window).ready(function () {
+        $(window).on("scroll", function () { ScrollHeads() });
+        var headers = $('body').find('.main_header');
+        var sticky = headers.offset().top;
+        function ScrollHeads() {
+            if ($(window).scrollTop() > sticky) {
+                headers.addClass("head_Sticky");
+            } else {
+                headers.removeClass("head_Sticky");
+            }
+        }
+    });
+
+    $(window).ready(function () {
+        var headWidth = $('body').find('.header_section').height();
+        $('body').find('.page_search_box').height(headWidth);
     });
 
     $(window).ready(function () {
@@ -32,7 +50,7 @@
                     window.open(hrf, targ);
                 }
                 else {
-                    $('#divLoaders').fadeIn(300);
+                    $('#divLoaders').fadeIn(200);
                     setTimeout(function () {
                         location.href = hrf;
                     }, 300);
@@ -60,6 +78,7 @@
         }
     });
 
+
     // Slick Slider Activation
     var $sliderActvation = $('.slick_slider_activation');
     if ($sliderActvation.length > 0) {
@@ -75,7 +94,11 @@
         centerMode: true,
         centerPadding: '0',
         slidesToShow: 4,
-        arrows: false,
+        infinite: true,
+        speed: 200,
+        arrows: true,
+        prevArrow: false,
+        nextArrow: false,
         vertical: true,
         focusOnSelect: true,
         asNavFor: '.product_zoom_main_img',
@@ -108,7 +131,11 @@
         centerMode: true,
         centerPadding: '0',
         slidesToShow: 1,
-        arrows: false,
+        infinite: true,
+        speed: 200,
+        arrows: true,
+        prevArrow: false,
+        nextArrow: false,
         vertical: true,
         asNavFor: '.zoom_tab_img',
         responsive: [
@@ -119,6 +146,19 @@
                 }
             },
         ]
+    });
+
+    $('.slick-header_top').slick({
+        centerMode: true,
+        centerPadding: '0',
+        slidesToShow: 1,
+        infinite: true,
+        speed: 300,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        arrows: true,
+        prevArrow: false,
+        nextArrow: false,
     });
 
     /*---canvas menu activation---*/
@@ -167,7 +207,7 @@
     $.scrollUp({
         scrollText: '<i class="ion-android-arrow-up"></i>',
         easingType: 'linear',
-        scrollSpeed: 900,
+        scrollSpeed: 500,
         animation: 'fade'
     });
 
@@ -328,7 +368,7 @@
 
     //Quick View Product
     $('[id^="quickViewProduct-"]').on('click', function () {
-        $('#divLoaders').fadeIn(300);
+        $('#divLoaders').fadeIn(200);
         var id = $(this).attr('name');
         var formData = new FormData();
         formData.append('id', id);
@@ -424,5 +464,4 @@
             }
         }, 3000);
     });
-
 })(jQuery);	

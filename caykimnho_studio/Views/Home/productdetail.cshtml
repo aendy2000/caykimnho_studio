@@ -7,25 +7,39 @@
     ViewBag.Title = "productdetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var images = Model.Images.Split('#').ToList();
+    int i = 0;
 }
 
-<section class="product_details mb-135">
+<section class="product_details mb-4">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="product_zoom_gallery">
                     <div class="zoom_gallery_inner d-flex">
                         <div class="zoom_tab_img">
+                            @if (!string.IsNullOrEmpty(Model.Videos))
+                            {
+                                <a id="targetImages-videoPro" class="zoom_tabimg_list" href="javascript:void(0)"><img src="~/Content/assets/img/product/videoPlay2.gif" alt="tab-thumb"></a>
+                            }
                             @foreach (var image in images)
                             {
                                 <a id="targetImages-@image.Split('=')[2]" class="zoom_tabimg_list" href="javascript:void(0)"><img src="@image" alt="tab-thumb"></a>
                             }
                         </div>
                         <div class="product_zoom_main_img">
-                            @foreach (var image in images)
+                            @if (!string.IsNullOrEmpty(Model.Videos))
                             {
                                 <div class="product_zoom_thumb">
-                                    <img data-image="image" src="@image" alt="">
+                                    <video id="videoProductShow" width="100%" height="100%" controls autoplay>
+                                        <source src="@Model.Videos">
+                                    </video>
+                                </div>
+                            }
+                            @foreach (var image in images)
+                            {
+                                i++;
+                                <div class="product_zoom_thumb" id="imgHeight-@i">
+                                    <img data-image="image" style="border-radius: 0px" src="@image" alt="">
                                 </div>
                             }
                         </div>
@@ -35,33 +49,19 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product_d_right">
                     <h1>@Model.Name</h1>
-                    <div class="product_ratting_review d-flex align-items-center">
-                        <div class=" product_ratting">
-                            <ul class="d-flex">
-                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                                <li><a href="#"><i class="ion-ios-star"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="product_review">
-                            <ul class="d-flex">
-                                <li>4 đánh giá</li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="price_box">
                         @{
                             var sale = Model.DetailProducts.OrderByDescending(o => o.Sale).First().Sale;
                             var prices = Model.DetailProducts.First().Price;
                             if (sale != 0)
                             {
+                                <span>Giá: </span>
                                 <span class="current_price text-danger">@((prices - (prices * sale)).ToString("0,0"))đ </span>
                                 <span class="old_price"> @prices.ToString("0,0")đ</span>
                             }
                             else
                             {
+                                <span style="font-size: 18px; font-weight: 500">Giá: </span>
                                 <span class="current_price text-danger">@prices.ToString("0,0")đ</span>
                             }
                         }
@@ -107,49 +107,25 @@
                             <a data-tippy="Thêm vào yêu thích" class="wishlist"><i class="ion-ios-heart"></i></a>
                         </div>
                     </div>
-                    <div class="product_sku">
-                        <p><span>SKU: </span> #PRODUCT@(Model.ID.ToString("D6"))</p>
-                    </div>
-                    <div class="product_tags d-flex">
-                        <span>DANH MỤC: </span>
-                        <ul class="d-flex">
-                            <li><a href="#">@Model.Categories.Name</a></li>
-                        </ul>
-                    </div>
-                    <div class="priduct_social d-flex">
-                        <span>SHARE: </span>
-                        <ul>
-                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                            <li><a href="#"><i class="ion-social-googleplus-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
-                            <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!--product details end-->
-
-<div class="product_d_info mb-118">
+<div class="product_d_info">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="product_d_inner">
                     <div class="product_info_button border-bottom">
-                        <ul class="nav" role="tablist">
+                        <ul class="nav" role="tablist" style="justify-content: center">
                             <li>
-                                <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Chi tiết</a>
+                                <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Chi tiết sản phẩm</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Đánh giá</a>
+                                <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Đánh giá sản phẩm</a>
                             </li>
-                            <li>
-                                <a data-toggle="tab" href="#video" role="tab" aria-controls="video" aria-selected="false">Video</a>
-                            </li>
-
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -224,21 +200,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="video" role="tabpanel">
-                            <div class="product_tab_vidio text-center">
-                                <iframe style="border-radius:15px" width="729" height="410" src="@Model.Videos" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="border-bottom mb-4"></div>
 <!--product info end-->
 <!--product area start-->
-<section class="product_area related_products mb-118">
+<section class="product_area related_products mb-0">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -248,13 +219,13 @@
             </div>
         </div>
         <div class="product_container row">
-            <div class=" product_slick slick_slider_activation" data-slick='{
+            <div class="product_slick slick_slider_activation" data-slick='{
                     "slidesToShow": 4,
                     "slidesToScroll": 1,
                     "arrows": true,
                     "dots": false,
                     "autoplay": true,
-                    "speed": 500,
+                    "speed": 300,
                     "infinite": true,
                     "responsive":[
                       {"breakpoint":992, "settings": { "slidesToShow": 3 } },
@@ -322,6 +293,12 @@
         </div>
     </div>
 </section>
-
+<script>
+    $(document).ready(function () {
+        var heights = $('body').find('[id^="imgHeight-1"]').height();
+        $('body').find('[id="videoProductShow"]').height(heights);
+        $('body').find('.product_zoom_main_img').children().height(heights);
+    });
+</script>
 <!--product area end-->
 <script src="~/Validation/addCart.js"></script>

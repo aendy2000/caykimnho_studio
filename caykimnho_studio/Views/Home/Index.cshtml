@@ -15,7 +15,7 @@
             "arrows": true,
             "dots": true,
             "autoplay": true,
-            "speed": 500,
+            "speed": 300,
             "infinite": true
         }'>
         <div class="single_slider d-flex align-items-center" data-bgimg="@Url.Content("~/Content/assets/img/slider/slider1.jpg")">
@@ -118,7 +118,7 @@
 </section>
 <!--shipping section end-->
 <!-- product section start -->
-<section class="product_section mb-96">
+<section class="product_section">
     <div class="container">
         <div class="product_header d-flex justify-content-between mb-50">
             <div class="section_title">
@@ -138,9 +138,9 @@
                             "rows": 2,
                             "arrows": true,
                             "dots": false,
-                            "autoplay": false,
+                            "autoplay": true,
                             "speed": 300,
-                            "infinite": false,
+                            "infinite": true,
                             "responsive":[
                               {"breakpoint":992, "settings": { "slidesToShow": 3 } },
                               {"breakpoint":768, "settings": { "slidesToShow": 2 } },
@@ -156,15 +156,6 @@
                                         <img class="primary_img" src="@item.Images.Split('#')[0].ToString()"
                                              alt="consectetur">
                                     </a>
-                                    <div class="product_action">
-                                        <ul>
-                                            <li class="quick_view">
-                                                <a data-tippy="Xem nhanh sản phẩm" id="quickViewProduct-@item.ID" name="@item.ID" >
-                                                    <i class="icon-size-fullscreen icons"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                     @{
                                         var sale = item.DetailProducts.OrderByDescending(o => o.Sale).First().Sale;
                                         if (sale != 0)
@@ -217,8 +208,8 @@
 </section>
 <!-- product section end -->
 <!-- banner section start -->
-<section class="banner_section banner_style2 mb-109">
-    <div class="container-fluid">
+<section class="banner_section banner_style2 mb-2">
+    <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <figure class="single_banner position-relative">
@@ -251,7 +242,7 @@
 </section>
 <!-- banner section end -->
 <!-- product section start -->
-<section class="product_section mb-80">
+<section class="product_section">
     <div class="container">
         <div class="product_header d-flex justify-content-between  mb-60">
             <div class="section_title">
@@ -259,7 +250,7 @@
             </div>
             <div class="product_tab_btn d-flex">
                 <div class="all_product">
-                    <a href="shop.html">All Product</a>
+                    <a href="shop.html">Xem tất cả</a>
                 </div>
             </div>
         </div>
@@ -271,9 +262,9 @@
                             "rows": 2,
                             "arrows": true,
                             "dots": false,
-                            "autoplay": false,
+                            "autoplay": true,
                             "speed": 300,
-                            "infinite": false,
+                            "infinite": true,
                             "responsive":[
                               {"breakpoint":992, "settings": { "slidesToShow": 3 } },
                               {"breakpoint":768, "settings": { "slidesToShow": 2 } },
@@ -289,7 +280,7 @@
                                         <img class="primary_img" src="@item.Images.Split('#')[0].ToString()"
                                              alt="consectetur">
                                     </a>
-                                    <div class="product_action">
+                                    @*<div class="product_action">
                                         <ul>
                                             <li class="quick_view">
                                                 <a data-tippy="Xem nhanh sản phẩm" id="quickViewProduct-@item.ID" name="@item.ID" >
@@ -297,7 +288,7 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div>*@
                                     @{
                                         var sale = item.DetailProducts.OrderByDescending(o => o.Sale).First().Sale;
                                         if (sale != 0)
@@ -350,7 +341,7 @@
 </section>
 <!-- product section end -->
 <!-- product section start -->
-<section class="product_section mb-80">
+<section class="product_section">
     <div class="container">
         <div class="product_header d-flex justify-content-between  mb-60">
             <div class="section_title">
@@ -370,9 +361,9 @@
                             "rows": 2,
                             "arrows": true,
                             "dots": false,
-                            "autoplay": false,
+                            "autoplay": true,
                             "speed": 300,
-                            "infinite": false,
+                            "infinite": true,
                             "responsive":[
                               {"breakpoint":992, "settings": { "slidesToShow": 3 } },
                               {"breakpoint":768, "settings": { "slidesToShow": 2 } },
@@ -388,7 +379,7 @@
                                         <img class="primary_img" src="@item.Images.Split('#')[0].ToString()"
                                              alt="consectetur">
                                     </a>
-                                    <div class="product_action">
+                                    @*<div class="product_action">
                                         <ul>
                                             <li class="quick_view">
                                                 <a data-tippy="Xem nhanh sản phẩm" id="quickViewProduct-@item.ID" name="@item.ID" >
@@ -396,7 +387,7 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div>*@
                                     @{
                                         var sale = item.DetailProducts.OrderByDescending(o => o.Sale).First().Sale;
                                         if (sale != 0)
@@ -449,7 +440,7 @@
 </section>
 <!-- product section end -->
 <!-- banner section start -->
-<section class="banner_section mb-96">
+<section class="banner_section mb-5">
     <div class="container">
         <div class="section_title mb-60">
             <h2>SET SẢN PHẨM PHỐI SẴN</h2>
@@ -457,7 +448,7 @@
         <div class="banner_container d-flex">
             <figure class="single_banner position-relative mr-30">
                 <img src="~/Content/assets/img/bg/bg1.jpg" alt="">
-                <figcaption class="banner_text position-absolute">
+                <figcaption class="banner_text2 position-absolute">
                     <h3>SET Mẫu phối đồ</h3>
                     <p>
                         Những SET mẫu đa dạng, <br> phong cách, xinh xắn <br /> được phối từ các sản phẩm <br />của
@@ -468,7 +459,7 @@
             </figure>
             <figure class="single_banner position-relative">
                 <img src="~/Content/assets/img/bg/bg2.jpg" alt="">
-                <figcaption class="banner_text position-absolute">
+                <figcaption class="banner_text2 position-absolute">
                     <h3>SET Mẫu phối đồ</h3>
                     <p>Mẫu phối sẵn các sản phẩm của Cây Kim Nhỏ cho bạn thõa sức tham khảo!</p>
                 </figcaption>

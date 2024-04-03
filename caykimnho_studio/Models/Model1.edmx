@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="aendysho_caykimnhoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CayKimNhoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="ID" />
@@ -194,7 +194,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="aendysho_caykimnhoModelStoreContainer">
+        <EntityContainer Name="CayKimNhoModelStoreContainer">
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart_Detail" EntityType="Self.Cart_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -243,7 +243,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="aendysho_caykimnhoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CayKimNhoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="ID" />
@@ -451,7 +451,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="aendysho_caykimnhoEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CayKimNhoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Cart_Detail" EntityType="Self.Cart_Detail" />
           <EntitySet Name="Categories" EntityType="Self.Categories" />
@@ -501,9 +501,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="aendysho_caykimnhoModelStoreContainer" CdmEntityContainer="aendysho_caykimnhoEntities">
+        <EntityContainerMapping StorageEntityContainer="CayKimNhoModelStoreContainer" CdmEntityContainer="CayKimNhoEntities">
           <EntitySetMapping Name="Cart">
-            <EntityTypeMapping TypeName="aendysho_caykimnhoModel.Cart">
+            <EntityTypeMapping TypeName="CayKimNhoModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
@@ -516,7 +516,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cart_Detail">
-            <EntityTypeMapping TypeName="aendysho_caykimnhoModel.Cart_Detail">
+            <EntityTypeMapping TypeName="CayKimNhoModel.Cart_Detail">
               <MappingFragment StoreEntitySet="Cart_Detail">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_Cart" ColumnName="ID_Cart" />
@@ -536,7 +536,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="aendysho_caykimnhoModel.Categories">
+            <EntityTypeMapping TypeName="CayKimNhoModel.Categories">
               <MappingFragment StoreEntitySet="Categories">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -544,7 +544,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Colors">
-            <EntityTypeMapping TypeName="aendysho_caykimnhoModel.Colors">
+            <EntityTypeMapping TypeName="CayKimNhoModel.Colors">
               <MappingFragment StoreEntitySet="Colors">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -552,7 +552,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DetailProducts">
-            <EntityTypeMapping TypeName="aendysho_caykimnhoModel.DetailProducts">
+            <EntityTypeMapping TypeName="CayKimNhoModel.DetailProducts">
               <MappingFragment StoreEntitySet="DetailProducts">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
@@ -567,7 +567,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="aendysho_caykimnhoModel.Products">
+            <EntityTypeMapping TypeName="CayKimNhoModel.Products">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -583,7 +583,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Size">
-            <EntityTypeMapping TypeName="aendysho_caykimnhoModel.Size">
+            <EntityTypeMapping TypeName="CayKimNhoModel.Size">
               <MappingFragment StoreEntitySet="Size">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

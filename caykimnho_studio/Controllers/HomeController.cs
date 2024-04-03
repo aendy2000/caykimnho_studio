@@ -10,7 +10,7 @@ namespace caykimnho_studio.Controllers
     [CheckRequests]
     public class HomeController : Controller
     {
-        aendysho_caykimnhoEntities model = new aendysho_caykimnhoEntities();
+        CayKimNhoEntities model = new CayKimNhoEntities();
         public ActionResult Index()
         {
             var lstProduct = model.Products.ToList();
