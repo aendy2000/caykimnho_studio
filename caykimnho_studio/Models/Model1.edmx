@@ -12,7 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_User" Type="int" />
           <Property Name="Total_Product" Type="int" />
-          <Property Name="Total_Price" Type="money" />
+          <Property Name="Total_Price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="First_Product_ID" Type="int" />
           <Property Name="First_Product_Name" Type="nvarchar(max)" />
           <Property Name="First_Product_Images" Type="nvarchar(max)" />
@@ -24,31 +24,31 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Cart" Type="int" Nullable="false" />
           <Property Name="ID_Products" Type="int" Nullable="false" />
-          <Property Name="Product_Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Product_Color" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Product_Size" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Product_Images" Type="nvarchar(max)" />
+          <Property Name="Product_Name" Type="nvarchar(max)" />
+          <Property Name="Product_Color" Type="nvarchar" MaxLength="256" />
+          <Property Name="Product_Size" Type="nvarchar" MaxLength="256" />
           <Property Name="Product_Quantity" Type="int" Nullable="false" />
-          <Property Name="Product_Price" Type="money" Nullable="false" />
-          <Property Name="Product_Import_Price" Type="money" Nullable="false" />
-          <Property Name="Product_Sale" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Product_Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Product_Import_Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Product_Sale" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Add_Date" Type="datetime" Nullable="false" />
           <Property Name="ID_Color" Type="int" Nullable="false" />
           <Property Name="ID_Size" Type="int" Nullable="false" />
-          <Property Name="Product_Images" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Colors">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="DetailProducts">
           <Key>
@@ -58,33 +58,44 @@
           <Property Name="ID_Products" Type="int" Nullable="false" />
           <Property Name="ID_Colors" Type="int" Nullable="false" />
           <Property Name="ID_Size" Type="int" Nullable="false" />
-          <Property Name="Import_Price" Type="money" Nullable="false" />
-          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Import_Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="Images" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Sale" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Images" Type="nvarchar(max)" />
+          <Property Name="Sale" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="State" Type="bit" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="ID_Category" Type="int" />
-          <Property Name="Create_Date" Type="datetime" Nullable="false" />
+          <Property Name="Images" Type="nvarchar(max)" />
           <Property Name="Videos" Type="nvarchar(max)" />
-          <Property Name="Images" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ToTalViews" Type="int" Nullable="false" />
-          <Property Name="TotalOrders" Type="int" Nullable="false" />
+          <Property Name="ToTalViews" Type="int" />
+          <Property Name="TotalOrders" Type="int" />
+          <Property Name="Create_Date" Type="datetime" Nullable="false" />
+          <Property Name="ID_Category" Type="int" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="Phone" Type="varchar" MaxLength="13" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_Cart_Detail_Cart">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
@@ -134,15 +145,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Colors_Colors">
-          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
-          <End Role="Colors1" Type="Self.Colors" Multiplicity="0..1" />
+        <Association Name="FK_Cart_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Colors">
+            <Principal Role="Products">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Colors1">
+            <Dependent Role="Cart">
+              <PropertyRef Name="First_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
               <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ID_User" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -202,6 +225,7 @@
           <EntitySet Name="DetailProducts" EntityType="Self.DetailProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_Detail_Cart" Association="Self.FK_Cart_Detail_Cart">
             <End Role="Cart" EntitySet="Cart" />
             <End Role="Cart_Detail" EntitySet="Cart_Detail" />
@@ -218,9 +242,13 @@
             <End Role="Size" EntitySet="Size" />
             <End Role="Cart_Detail" EntitySet="Cart_Detail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Colors_Colors" Association="Self.FK_Colors_Colors">
-            <End Role="Colors" EntitySet="Colors" />
-            <End Role="Colors1" EntitySet="Colors" />
+          <AssociationSet Name="FK_Cart_Products" Association="Self.FK_Cart_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_User" Association="Self.FK_Cart_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK_DetailProducts_Colors" Association="Self.FK_DetailProducts_Colors">
             <End Role="Colors" EntitySet="Colors" />
@@ -251,11 +279,13 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_User" Type="Int32" />
           <Property Name="Total_Product" Type="Int32" />
-          <Property Name="Total_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total_Price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="First_Product_ID" Type="Int32" />
           <Property Name="First_Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="First_Product_Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Cart" FromRole="Cart" ToRole="Cart_Detail" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Cart_Products" FromRole="Cart" ToRole="Products" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Cart_User" FromRole="Cart" ToRole="User" />
         </EntityType>
         <EntityType Name="Cart_Detail">
           <Key>
@@ -264,17 +294,17 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Cart" Type="Int32" Nullable="false" />
           <Property Name="ID_Products" Type="Int32" Nullable="false" />
-          <Property Name="Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Product_Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Product_Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product_Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Color" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Size" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Product_Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Product_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Product_Import_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Product_Sale" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Product_Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Product_Import_Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Product_Sale" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Add_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ID_Color" Type="Int32" Nullable="false" />
           <Property Name="ID_Size" Type="Int32" Nullable="false" />
-          <Property Name="Product_Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Detail_Cart" FromRole="Cart_Detail" ToRole="Cart" />
           <NavigationProperty Name="Colors" Relationship="Self.FK_Cart_Detail_Colors" FromRole="Cart_Detail" ToRole="Colors" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Cart_Detail_Products" FromRole="Cart_Detail" ToRole="Products" />
@@ -285,7 +315,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
         </EntityType>
         <EntityType Name="Colors">
@@ -293,10 +323,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Colors" FromRole="Colors" ToRole="Cart_Detail" />
-          <NavigationProperty Name="Colors1" Relationship="Self.FK_Colors_Colors" FromRole="Colors" ToRole="Colors1" />
-          <NavigationProperty Name="Colors2" Relationship="Self.FK_Colors_Colors" FromRole="Colors1" ToRole="Colors" />
           <NavigationProperty Name="DetailProducts" Relationship="Self.FK_DetailProducts_Colors" FromRole="Colors" ToRole="DetailProducts" />
         </EntityType>
         <EntityType Name="DetailProducts">
@@ -307,11 +335,11 @@
           <Property Name="ID_Products" Type="Int32" Nullable="false" />
           <Property Name="ID_Colors" Type="Int32" Nullable="false" />
           <Property Name="ID_Size" Type="Int32" Nullable="false" />
-          <Property Name="Import_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Import_Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Sale" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sale" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="Colors" Relationship="Self.FK_DetailProducts_Colors" FromRole="DetailProducts" ToRole="Colors" />
           <NavigationProperty Name="Products" Relationship="Self.FK_DetailProducts_Products" FromRole="DetailProducts" ToRole="Products" />
           <NavigationProperty Name="Size" Relationship="Self.FK_DetailProducts_Size" FromRole="DetailProducts" ToRole="Size" />
@@ -321,15 +349,16 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Boolean" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ID_Category" Type="Int32" />
-          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Videos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ToTalViews" Type="Int32" Nullable="false" />
-          <Property Name="TotalOrders" Type="Int32" Nullable="false" />
+          <Property Name="ToTalViews" Type="Int32" />
+          <Property Name="TotalOrders" Type="Int32" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ID_Category" Type="Int32" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Products" FromRole="Products" ToRole="Cart" />
           <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Products" FromRole="Products" ToRole="Cart_Detail" />
           <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
           <NavigationProperty Name="DetailProducts" Relationship="Self.FK_DetailProducts_Products" FromRole="Products" ToRole="DetailProducts" />
@@ -339,9 +368,21 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cart_Detail" Relationship="Self.FK_Cart_Detail_Size" FromRole="Size" ToRole="Cart_Detail" />
           <NavigationProperty Name="DetailProducts" Relationship="Self.FK_DetailProducts_Size" FromRole="Size" ToRole="DetailProducts" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_User" FromRole="User" ToRole="Cart" />
         </EntityType>
         <Association Name="FK_Cart_Detail_Cart">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
@@ -352,6 +393,30 @@
             </Principal>
             <Dependent Role="Cart_Detail">
               <PropertyRef Name="ID_Cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="First_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ID_User" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -403,18 +468,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Colors_Colors">
-          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
-          <End Role="Colors1" Type="Self.Colors" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Colors">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Colors1">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DetailProducts_Colors">
           <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
           <End Role="DetailProducts" Type="Self.DetailProducts" Multiplicity="*" />
@@ -459,9 +512,18 @@
           <EntitySet Name="DetailProducts" EntityType="Self.DetailProducts" />
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="Size" EntityType="Self.Size" />
+          <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_Cart_Detail_Cart" Association="Self.FK_Cart_Detail_Cart">
             <End Role="Cart" EntitySet="Cart" />
             <End Role="Cart_Detail" EntitySet="Cart_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Products" Association="Self.FK_Cart_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_User" Association="Self.FK_Cart_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK_Cart_Detail_Colors" Association="Self.FK_Cart_Detail_Colors">
             <End Role="Colors" EntitySet="Colors" />
@@ -478,10 +540,6 @@
           <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Colors_Colors" Association="Self.FK_Colors_Colors">
-            <End Role="Colors" EntitySet="Colors" />
-            <End Role="Colors1" EntitySet="Colors" />
           </AssociationSet>
           <AssociationSet Name="FK_DetailProducts_Colors" Association="Self.FK_DetailProducts_Colors">
             <End Role="Colors" EntitySet="Colors" />
@@ -521,6 +579,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_Cart" ColumnName="ID_Cart" />
                 <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
+                <ScalarProperty Name="Product_Images" ColumnName="Product_Images" />
                 <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
                 <ScalarProperty Name="Product_Color" ColumnName="Product_Color" />
                 <ScalarProperty Name="Product_Size" ColumnName="Product_Size" />
@@ -531,7 +590,6 @@
                 <ScalarProperty Name="Add_Date" ColumnName="Add_Date" />
                 <ScalarProperty Name="ID_Color" ColumnName="ID_Color" />
                 <ScalarProperty Name="ID_Size" ColumnName="ID_Size" />
-                <ScalarProperty Name="Product_Images" ColumnName="Product_Images" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -573,12 +631,12 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
-                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
-                <ScalarProperty Name="Videos" ColumnName="Videos" />
                 <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Videos" ColumnName="Videos" />
                 <ScalarProperty Name="ToTalViews" ColumnName="ToTalViews" />
                 <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -587,6 +645,18 @@
               <MappingFragment StoreEntitySet="Size">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="CayKimNhoModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

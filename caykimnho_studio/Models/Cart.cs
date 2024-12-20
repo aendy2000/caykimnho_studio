@@ -30,5 +30,7 @@ namespace caykimnho_studio.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart_Detail> Cart_Detail { get; set; }
+        public virtual Products Products { get; set; }
+        public virtual User User { get; set; }
     }
 }

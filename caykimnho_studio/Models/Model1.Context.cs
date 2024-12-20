@@ -32,5 +32,6 @@ namespace caykimnho_studio.Models
         public virtual DbSet<DetailProducts> DetailProducts { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Size> Size { get; set; }
+        public virtual DbSet<User> User { get; set; }
     }
 }

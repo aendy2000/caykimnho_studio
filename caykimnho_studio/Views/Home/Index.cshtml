@@ -277,8 +277,8 @@
                             <figure>
                                 <div class="product_thumb">
                                     <a>
-                                        <img class="primary_img" src="@item.Images.Split('#')[0].ToString()"
-                                             alt="consectetur">
+                                        <img class="primary_img" src="@Url.Content(item.Images.Split('#')[0].ToString())"
+                                             alt="Ảnh sản phẩm">
                                     </a>
                                     @*<div class="product_action">
                                         <ul>
@@ -340,105 +340,7 @@
     </div>
 </section>
 <!-- product section end -->
-<!-- product section start -->
-<section class="product_section">
-    <div class="container">
-        <div class="product_header d-flex justify-content-between  mb-60">
-            <div class="section_title">
-                <h2>Đang giảm giá</h2>
-            </div>
-            <div class="product_tab_btn d-flex">
-                <div class="all_product">
-                    <a href="shop.html">Xem tất cả</a>
-                </div>
-            </div>
-        </div>
-        <div class="product_container row">
-            <div class="tab-content">
-                <div class="product_slick slick_slider_activation" data-slick='{
-                            "slidesToShow": 4,
-                            "slidesToScroll": 1,
-                            "rows": 2,
-                            "arrows": true,
-                            "dots": false,
-                            "autoplay": true,
-                            "speed": 300,
-                            "infinite": true,
-                            "responsive":[
-                              {"breakpoint":992, "settings": { "slidesToShow": 3 } },
-                              {"breakpoint":768, "settings": { "slidesToShow": 2 } },
-                              {"breakpoint":300, "settings": { "slidesToShow": 1 } }
-                             ]
-                        }'>
-                    @foreach (var item in Model.OrderByDescending(o => o.ID).Take(8).ToList())
-                    {
-                        <article class="col single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a>
-                                        <img class="primary_img" src="@item.Images.Split('#')[0].ToString()"
-                                             alt="consectetur">
-                                    </a>
-                                    @*<div class="product_action">
-                                        <ul>
-                                            <li class="quick_view">
-                                                <a data-tippy="Xem nhanh sản phẩm" id="quickViewProduct-@item.ID" name="@item.ID" >
-                                                    <i class="icon-size-fullscreen icons"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>*@
-                                    @{
-                                        var sale = item.DetailProducts.OrderByDescending(o => o.Sale).First().Sale;
-                                        if (sale != 0)
-                                        {
-                                            <div class="product_label">
-                                                <span>-@((sale * 100).ToString("0,0"))%</span>
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                                <figcaption class="product_content text-center">
-                                    <div class="product_ratting">
-                                        <ul class="d-flex justify-content-center">
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                            <li><span>(4)</span></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="product_name">
-                                        <a  href="@Url.Action("productdetail", "home", new {id = item.ID})">@item.Name</a>
-                                    </h4>
-                                    <div class="price_box">
-                                        @{
-                                            var prices = item.DetailProducts.First().Price;
-                                            if (sale != 0)
-                                            {
-                                                <span class="current_price">@((prices - (prices * sale)).ToString("0,0"))đ </span>
-                                                <span class="old_price"> @prices.ToString("0,0")đ</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="current_price">@prices.ToString("0,0")đ</span>
-                                            }
-                                        }
-                                    </div>
-                                    <div class="add_to_cart">
-                                        <a  class="btn btn-primary" href="@Url.Action("productdetail", "home", new { id = item.ID })">Xem chi tiết</a>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- product section end -->
+
 <!-- banner section start -->
 <section class="banner_section mb-5">
     <div class="container">

@@ -17,6 +17,7 @@ namespace caykimnho_studio.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
+            this.Cart = new HashSet<Cart>();
             this.Cart_Detail = new HashSet<Cart_Detail>();
             this.DetailProducts = new HashSet<DetailProducts>();
         }
@@ -25,13 +26,15 @@ namespace caykimnho_studio.Models
         public string Name { get; set; }
         public bool State { get; set; }
         public string Description { get; set; }
-        public Nullable<int> ID_Category { get; set; }
-        public System.DateTime Create_Date { get; set; }
-        public string Videos { get; set; }
         public string Images { get; set; }
-        public int ToTalViews { get; set; }
-        public int TotalOrders { get; set; }
+        public string Videos { get; set; }
+        public Nullable<int> ToTalViews { get; set; }
+        public Nullable<int> TotalOrders { get; set; }
+        public System.DateTime Create_Date { get; set; }
+        public Nullable<int> ID_Category { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart_Detail> Cart_Detail { get; set; }
         public virtual Categories Categories { get; set; }

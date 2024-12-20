@@ -17,6 +17,7 @@ namespace caykimnho_studio.Models
         public int ID { get; set; }
         public int ID_Cart { get; set; }
         public int ID_Products { get; set; }
+        public string Product_Images { get; set; }
         public string Product_Name { get; set; }
         public string Product_Color { get; set; }
         public string Product_Size { get; set; }
@@ -27,7 +28,6 @@ namespace caykimnho_studio.Models
         public System.DateTime Add_Date { get; set; }
         public int ID_Color { get; set; }
         public int ID_Size { get; set; }
-        public string Product_Images { get; set; }
     
         public virtual Cart Cart { get; set; }
         public virtual Colors Colors { get; set; }

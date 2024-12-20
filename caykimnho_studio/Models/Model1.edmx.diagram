@@ -4,20 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e7c2efae40b242e2a236a991299c6e83" Name="Diagram1">
-        <EntityTypeShape EntityType="CayKimNhoModel.Cart" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CayKimNhoModel.Cart_Detail" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CayKimNhoModel.Categories" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CayKimNhoModel.Colors" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CayKimNhoModel.DetailProducts" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CayKimNhoModel.Products" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CayKimNhoModel.Size" Width="1.5" PointX="0.75" PointY="16.375" IsExpanded="true" />
+      <Diagram DiagramId="0554575a08de4ba8b58dc8aa6be6b94d" Name="Diagram1">
+        <EntityTypeShape EntityType="CayKimNhoModel.Cart" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CayKimNhoModel.Cart_Detail" Width="1.5" PointX="10.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CayKimNhoModel.Categories" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CayKimNhoModel.Colors" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CayKimNhoModel.DetailProducts" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CayKimNhoModel.Products" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CayKimNhoModel.Size" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CayKimNhoModel.User" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="CayKimNhoModel.FK_Cart_Detail_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="CayKimNhoModel.FK_Cart_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="CayKimNhoModel.FK_Cart_User" ManuallyRouted="false" />
         <AssociationConnector Association="CayKimNhoModel.FK_Cart_Detail_Colors" ManuallyRouted="false" />
         <AssociationConnector Association="CayKimNhoModel.FK_Cart_Detail_Products" ManuallyRouted="false" />
         <AssociationConnector Association="CayKimNhoModel.FK_Cart_Detail_Size" ManuallyRouted="false" />
         <AssociationConnector Association="CayKimNhoModel.FK_Products_Categories" ManuallyRouted="false" />
-        <AssociationConnector Association="CayKimNhoModel.FK_Colors_Colors" ManuallyRouted="false" />
         <AssociationConnector Association="CayKimNhoModel.FK_DetailProducts_Colors" ManuallyRouted="false" />
         <AssociationConnector Association="CayKimNhoModel.FK_DetailProducts_Products" ManuallyRouted="false" />
         <AssociationConnector Association="CayKimNhoModel.FK_DetailProducts_Size" ManuallyRouted="false" />

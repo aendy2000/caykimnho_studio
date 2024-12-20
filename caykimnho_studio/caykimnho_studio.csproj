@@ -172,6 +172,9 @@
     <Compile Include="Models\Size.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,16 +223,11 @@
     <Content Include="Content\assets\js\vendor\popper.js" />
     <Content Include="Content\assets\js\vendor\vendor.min.js" />
     <Content Include="Content\assets\js\wow.min.js" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Loading\loading.css" />
     <Content Include="Content\Loading\logoload.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -240,6 +238,10 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Product_Images\SP1\xanhhoamaitrangcothatlung1.jpg" />
+    <Content Include="Product_Images\SP1\xanhhoamaitrangcothatlung2.jpg" />
+    <Content Include="Product_Images\SP1\xanhhoamaitrangcothatlung3.jpg" />
+    <Content Include="Product_Images\SP1\xanhhoamaitrangcothatlung4.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\assets\css\style" />
@@ -312,6 +314,13 @@
     <Content Include="Views\Home\productdetail.cshtml" />
     <Content Include="Views\Home\_productQuickView.cshtml" />
     <Content Include="Views\Home\_minicart.cshtml" />
+    <Content Include="_next\static\media\581909926a08bbc8-s.woff2" />
+    <Content Include="_next\static\media\6d93bde91c0c2823-s.woff2" />
+    <Content Include="_next\static\media\a34f9d1faa5f3315-s.p.woff2" />
+    <Content Include="_next\static\media\df0a9ae256c0569c-s.woff2" />
+    <Content Include="_next\static\media\26a46d62cd723877-s.woff2" />
+    <Content Include="_next\static\media\55c55f0601d81cf3-s.woff2" />
+    <Content Include="_next\static\media\97e0cb1ae144a2a9-s.woff2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,10 +330,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />

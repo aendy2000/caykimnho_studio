@@ -23,7 +23,7 @@
                             }
                             @foreach (var image in images)
                             {
-                                <a id="targetImages-@image.Split('=')[2]" class="zoom_tabimg_list" href="javascript:void(0)"><img src="@image" alt="tab-thumb"></a>
+                                <a id="targetImages-@image" class="zoom_tabimg_list" href="javascript:void(0)"><img src="@Url.Content(image)" alt="tab-thumb"></a>
                             }
                         </div>
                         <div class="product_zoom_main_img">
@@ -31,7 +31,7 @@
                             {
                                 <div class="product_zoom_thumb">
                                     <video id="videoProductShow" width="100%" height="100%" controls autoplay>
-                                        <source src="@Model.Videos">
+                                        <source src="@Url.Content(Model.Videos)">
                                     </video>
                                 </div>
                             }
@@ -39,7 +39,7 @@
                             {
                                 i++;
                                 <div class="product_zoom_thumb" id="imgHeight-@i">
-                                    <img data-image="image" style="border-radius: 0px" src="@image" alt="">
+                                    <img data-image="image" style="border-radius: 0px" src="@Url.Content(image)" alt="">
                                 </div>
                             }
                         </div>
@@ -80,7 +80,7 @@
                                 @foreach (var items in Model.DetailProducts.ToList())
                                 {
                                     <li>
-                                        <label data-images="@items.Images.Split('=')[2]" class="checkmark color3" name="@items.Colors.ID" id="checkmaulabel-@items.Colors.ID">@items.Colors.Name</label>
+                                        <label data-images="@Url.Content(items.Images)" class="checkmark color3" name="@items.Colors.ID" id="checkmaulabel-@items.Colors.ID">@items.Colors.Name</label>
                                         <input hidden id="valuecolor" value="" />
                                     </li>
                                 }
